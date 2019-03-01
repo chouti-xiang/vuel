@@ -212,15 +212,12 @@
             </div>
 </template>
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-import qs from 'qs'
-Vue.prototype.$axios = axios
+import { getsessionStorage } from '@/utils/sessionStorage'
 export default {
   name: 'home',
   data () {
     return {
-      name: " ",
+      name: ' ',
       tag: false,
       selected: 1,
       item: ''
@@ -228,16 +225,21 @@ export default {
   },
   mounted () {
     const url = 'http://www.aisu10.com/index.php?app=web&act=index-initDATAT'
-    this.$axios.post(url, qs.stringify({
-      pid: 7
-    }),
-    {
-      emulateJSON: true
+    // this.$store.commit('get_qqtj', {url: url, pid: 7})
+    // this.item = this.$store.getters.homeitem
+    this.$store.dispatch('get_qqtj', {url: url, pid: 7}).then(res => {
+      this.item = JSON.parse(getsessionStorage('get_item'))
     })
-      .then(res => {
-        this.item = res.data.data
-        this.selected = 3
-      })
+  //   this.$axios.post(url, qs.stringify({
+  //     pid: 7
+  //   }),
+  //   {
+  //     emulateJSON: true
+  //   })
+  //     .then(res => {
+  //       this.item = res.data.data
+  //       this.selected = 3
+  //     })
   }
 }
 </script>
