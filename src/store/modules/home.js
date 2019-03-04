@@ -11,23 +11,23 @@ state: {
 mutations: {//同步
   GET_ITEM: (state, data) => {
     state.item = data
-    setsessionStorage('get_item', JSON.stringify(data))
   }
 },
 actions: {//异步
   get_qqtj({commit}, data) {
-    console.log(data)
+    return new Promise((resolve, reject) => {
     axios.post(data.url, qs.stringify({
       pid: data.pid
-    }),
-    {
-      emulateJSON: true
-    })
+    }))
       .then(res => {
       commit('GET_ITEM', res.data.data)
-      // 
+      setsessionStorage('get_item', JSON.stringify(data))
+      resolve()
     })
-  }
+      .catch(error => {
+        reject('错误:'+error)
+      })
+  })}
 }
 }
 

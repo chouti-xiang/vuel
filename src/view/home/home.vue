@@ -225,21 +225,13 @@ export default {
   },
   mounted () {
     const url = 'http://www.aisu10.com/index.php?app=web&act=index-initDATAT'
-    // this.$store.commit('get_qqtj', {url: url, pid: 7})
-    // this.item = this.$store.getters.homeitem
     this.$store.dispatch('get_qqtj', {url: url, pid: 7}).then(res => {
-      this.item = JSON.parse(getsessionStorage('get_item'))
+      if (!this.$store.getters.homeitem) {
+        this.item = JSON.parse(getsessionStorage('get_item'))
+      } else {
+        this.item = this.$store.getters.homeitem
+      }  
     })
-  //   this.$axios.post(url, qs.stringify({
-  //     pid: 7
-  //   }),
-  //   {
-  //     emulateJSON: true
-  //   })
-  //     .then(res => {
-  //       this.item = res.data.data
-  //       this.selected = 3
-  //     })
   }
 }
 </script>
