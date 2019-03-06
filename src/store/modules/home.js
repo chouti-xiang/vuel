@@ -1,7 +1,5 @@
-import axios from 'axios'
-import qs from 'qs'
 import { setsessionStorage } from '@/utils/sessionStorage'
-
+import { request }   from '@/api/home'
 const home = {
 state: {
   pid: '',
@@ -16,10 +14,7 @@ mutations: {//同步
 actions: {//异步
   get_qqtj({commit}, data) {
     return new Promise((resolve, reject) => {
-    axios.post(data.url, qs.stringify({
-      pid: data.pid
-    }))
-      .then(res => {
+    request(data).then(res => {
       commit('GET_ITEM', res.data.data)
       setsessionStorage('get_item', JSON.stringify(data))
       resolve()

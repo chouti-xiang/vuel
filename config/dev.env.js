@@ -5,5 +5,5 @@ const prodEnv = require('./prod.env')
 module.exports = merge(prodEnv, {
    NODE_ENV: '"development"',
   ENV_CONFIG: '"dev"',
-  BASE_API: '"http://vue.dc"'
+  BASE_API: '"http://www.aisu10.com"'
 })

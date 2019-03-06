@@ -60,7 +60,7 @@
                                 <div class="ibx-uc-uimg-mask">
                                     <a data-click="{&quot;act&quot;:&quot;uc_set&quot;}" class="ibx-uc-ulink" target="_blank" href="http://www.baidu.com/p/setting/profile/portrait">更换头像</a>
                                 </div>
-                                <img class="ibx-uc-img" >                     
+                                <img class="ibx-uc-img" src="@/assets/2.jpg" >                     
                             </div>
                             <div class="ibx-uc-unick">
                                 <a data-click="{&quot;act&quot;:&quot;uc_name&quot;}" target="_blank" href="http://www.baidu.com/p/setting/profile/basic" class="ibx-uc-nick">{{name}}</a>                
@@ -136,7 +136,7 @@
                         </div>
                         <div id="hot-video" class="my-video">
                             <ul class="ibx-video-list" style="width: 2868px; left: 0px;" id="hot-video1">
-                            <li class="ibx-video-item" v-for="(value, key, index) in item"><a target="_blank" :href="value.url"><img v-bind:src="value.thumb" :alt="value.title" width="130"></a><div class="ibx-video-detail"><em class="ibx-video-dtitle-rank front ">{{key+1}}</em><a target="_blank" class="ibx-video-dtitle" :href="value.url" :title="value.title">{{value.title}}</a><label class="ibx-video-actor" :title="key">{{key}}</label><label class="ibx-video-tag" :title="value.type">{{value.type}}</label></div></li>
+                            <li class="ibx-video-item" v-for="(value, key, index) in video"><a target="_blank" :href="value.url"><img v-bind:src="sit+value.thumb" :alt="value.title" width="130"></a><div class="ibx-video-detail"><em class="ibx-video-dtitle-rank front ">{{key+1}}</em><a target="_blank" class="ibx-video-dtitle" :href="value.url" :title="value.title">{{value.title}}</a><label class="ibx-video-actor" :title="key">{{key}}</label><label class="ibx-video-tag" :title="value.type">{{value.type}}</label></div></li>
                             </ul>
                         </div>
                         <div class="ibx-video-mask"></div>
@@ -167,7 +167,7 @@
                         <div id="xinwen-pernews-main" class="xinwen-pernews-main">
                         <ul class="xinwen-normal-list xinwen-pernews-list" style="width: 976px; left: 0px;" id="hot_article">
                             <li class="xinwen-pernews-item"  v-for="article in item">
-                                <div class="xinwen-pernews-item-news"><a class="xinwen-pernews-item-link" target="_blank" href="http://tj.people.com.cn/n2/2018/0823/c375366-31968703.html"><img class="xinwen-pernews-item-img" :src="article.thumb" alt=""></a><div class="xinwen-pernews-item-detail detail-type-img"><a class="xinwen-pernews-item-title" target="_blank" href="http://tj.people.com.cn/n2/2018/0823/c375366-31968703.html" title="article.title">{{article.title}}</a>
+                                <div class="xinwen-pernews-item-news"><a class="xinwen-pernews-item-link" target="_blank" href="http://tj.people.com.cn/n2/2018/0823/c375366-31968703.html"><img class="xinwen-pernews-item-img" :src="sit+article.thumb" alt=""></a><div class="xinwen-pernews-item-detail detail-type-img"><a class="xinwen-pernews-item-title" target="_blank" href="http://tj.people.com.cn/n2/2018/0823/c375366-31968703.html" title="article.title">{{article.title}}</a>
                                     <!-- <p class="xinwen-pernews-item-info"><span class="xinwen-pernews-item-read">0</span><span class="xinwen-pernews-item-up">0</span><span class="xinwen-pernews-item-down">0</span></p> -->
                                 </div></div>
                             </li>
@@ -193,7 +193,7 @@
                            <!--  <a href="http://koubei.baidu.com/home?fr=ibaidu" class="OP_LOG_TITLE enter-koubei-link koubei-home-link" data-click="{&quot;act&quot;: &quot;card_open_koubei_home&quot;}" target="_blank" style="display: inline;">进入我的口碑 &gt;</a> -->
                             </div></div><div class="ibx-inner-content" id="ibx-koubei"><div id="koubei-mine-container" class="koubei-mine-container "><div class="koubei-mine-top"><div class="ibx-card-pager"><span class="ibx-card-pager-prev"></span><span class="ibx-card-pager-item current" data-page="0"></span><span class="ibx-card-pager-item" data-page="1"></span><span class="ibx-card-pager-item" data-page="2"></span><span class="ibx-card-pager-next"></span></div></div><div id="koubei-mine-list">
                             <ul class="koubei-mine-list"  >
-                            <li class="koubei-mine-item" v-for="(value, key, index) in item"><div class="koubei-mine-item-container"><p class="koubei-mine-item-title"><a class="OP_LOG_TITLE" target="_blank" :title="value.title" :href="value.url" data-click="{&quot;act&quot;: &quot;card_koubei_item_message&quot;}" v-html="value.tag"></a></p><span class="koubei-mine-item-time">{{value.date}}</span></div></li>
+                            <li class="koubei-mine-item" v-for="(value, key, index) in think"><div class="koubei-mine-item-container"><p class="koubei-mine-item-title"><a class="OP_LOG_TITLE" target="_blank" :title="value.title" :href="value.url" data-click="{&quot;act&quot;: &quot;card_koubei_item_message&quot;}" v-html="value.tag"></a></p><span class="koubei-mine-item-time">{{value.date}}</span></div></li>
                             </ul>
                             </div></div></div></div>
                     </div>
@@ -220,16 +220,40 @@ export default {
       name: ' ',
       tag: false,
       selected: 1,
-      item: ''
+      item: '',
+      video: '',
+      think: '',
+      sit:''
+    }
+  },
+  created () {
+    if(process.env.BASE_API  == 'undefined'){
+      this.sit = ''
+    } else {
+      this.sit = process.env.BASE_API
     }
   },
   mounted () {
-    const url = 'http://www.aisu10.com/index.php?app=web&act=index-initDATAT'
+    const url = this.sit+'/index.php?app=web&act=index-initDATAT'
     this.$store.dispatch('get_qqtj', {url: url, pid: 7}).then(res => {
       if (!this.$store.getters.homeitem) {
         this.item = JSON.parse(getsessionStorage('get_item'))
       } else {
         this.item = this.$store.getters.homeitem
+      }  
+    })
+    this.$store.dispatch('get_qqtj', {url: url, pid: 4}).then(res => {
+      if (!this.$store.getters.homeitem) {
+        this.video = JSON.parse(getsessionStorage('get_video'))
+      } else {
+        this.video = this.$store.getters.homeitem
+      }  
+    })
+    this.$store.dispatch('get_qqtj', {url: url, pid: 9}).then(res => {
+      if (!this.$store.getters.homeitem) {
+        this.think = JSON.parse(getsessionStorage('get_think'))
+      } else {
+        this.think = this.$store.getters.homeitem
       }  
     })
   }
