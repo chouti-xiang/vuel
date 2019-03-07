@@ -131,8 +131,8 @@
                         </div>
                         <div class="ibx-inner-content" id="ibx-video-list">
                         <div class="hot-video-tab">
-                            <span class="hot-video-tab-item hot-video-tab-tv OP_LOG_TITLE"  v-bind:class="{'current':selected ==1}" data-id="0" click='movie()'>电影</span>
-                            <span class="hot-video-tab-item hot-video-tab-movie OP_LOG_TITLE"  v-bind:class="{'current':selected ==2}"><router-link to="/foo" click='dianshiju()'>电视剧</router-link></span>
+                            <span class="hot-video-tab-item hot-video-tab-tv OP_LOG_TITLE"  v-bind:class="{'current':selected ==1}" data-id="0" @click="changetab('video', 4, {key:'selected',value:1})">电影</span>
+                            <span class="hot-video-tab-item hot-video-tab-movie OP_LOG_TITLE"  v-bind:class="{'current':selected ==2}" @click="changetab('video', 5, {key:'selected',value:2})">电视剧</span>
                         </div>
                         <div id="hot-video" class="my-video">
                             <ul class="ibx-video-list" style="width: 2868px; left: 0px;" id="hot-video1">
@@ -152,8 +152,8 @@
                         <div class="ibx-inner-title">
                             <a target="_blank" href="http://xinwen.baidu.com/" class="ibx-inner-title-ctx">激情推荐</a>
                             <ul class="ibx-inner-title-tab">
-                                <li data-click="{&quot;act&quot;: &quot;card_xinwen_pernews&quot;}" class="ibx-inner-title-tabitem ibx-xinwen-pernews OP_LOG_TITLE" click='tools()' v-bind:class="{'current':selected ==1}">工具类</li>
-                                <li data-click="{&quot;act&quot;: &quot;card_xinwen_hot&quot;}" class="ibx-inner-title-tabitem ibx-xinwen-hot OP_LOG_TITLE" click="life()" v-bind:class="{'current':selected ==2}">生活类</li>
+                                <li data-click="{&quot;act&quot;: &quot;card_xinwen_pernews&quot;}" class="ibx-inner-title-tabitem ibx-xinwen-pernews OP_LOG_TITLE" @click="changetab('item', 7, {key:'is_tj',value:1})" v-bind:class="{'current':is_tj ==1}">工具类</li>
+                                <li data-click="{&quot;act&quot;: &quot;card_xinwen_hot&quot;}" class="ibx-inner-title-tabitem ibx-xinwen-hot OP_LOG_TITLE" @click="changetab('item', 8, {key:'is_tj',value:2})" v-bind:class="{'current':is_tj ==2}">生活类</li>
                             </ul>
                             <div class="xinwen-title-link-container OP_LOG_TITLE"><a href="javascript:void(0)" class="OP_LOG_TITLE" click="gongzhong">关注我的公众号</a></div>
                             <div style="width: 150px;height: 100px;z-index: 10;position: absolute;right: 0;top: 50px;" v-if="tag">
@@ -184,9 +184,9 @@
                           <div class="ibx-inner-title">
                           <a data-click="{&quot;act&quot;: &quot;card_koubei_link&quot;}" target="_blank" href="http://koubei.baidu.com/" class="ibx-inner-title-ctx">醍醐灌顶</a>
                           <ul class="ibx-inner-title-tab">
-                            <li data-click="{&quot;act&quot;: &quot;card_koubei_mine&quot;}" class="ibx-inner-title-tabitem ibx-koubei-mine OP_LOG_TITLE" v-bind:class="{'current':selected ==1}" click="gongzuo()">我的工作</li>
-                            <li data-click="{&quot;act&quot;: &quot;card_koubei_turth&quot;}" class="ibx-inner-title-tabitem ibx-koubei-turth OP_LOG_TITLE" v-bind:class="{'current':selected ==2}" click="shenghuo()">我的生活</li>
-                            <li data-click="{&quot;act&quot;: &quot;card_koubei_hot&quot;}" class="ibx-inner-title-tabitem ibx-koubei-hot OP_LOG_TITLE"  v-bind:class="{'current':selected ==3}" click="ganwu()">我的感悟</li>
+                            <li ref="ho" data-click="{&quot;act&quot;: &quot;card_koubei_mine&quot;}" class="ibx-inner-title-tabitem ibx-koubei-mine OP_LOG_TITLE" v-bind:class="{'current':is_th ==1}" @click="changetab('think', 9, {key:'is_th',value:1})">我的工作</li>
+                            <li ref="think" class="ibx-inner-title-tabitem ibx-koubei-turth OP_LOG_TITLE" v-bind:class="{'current':is_th ==2}" @click="changetab('think', 10, {key:'is_th',value:2})">我的生活</li>
+                            <li data-click="{&quot;act&quot;: &quot;card_koubei_hot&quot;}" class="ibx-inner-title-tabitem ibx-koubei-hot OP_LOG_TITLE"  v-bind:class="{'current':is_th ==3}" @click="changetab('think', 11, {key:'is_th',value:3})">我的感悟</li>
                           </ul>
                             <div class="koubei-title-link-container OP_LOG_TITLE">
                             <!-- <a href="http://koubei.baidu.com/truth/wall?fr=ibaidu" class="OP_LOG_TITLE enter-koubei-link koubei-wall-link" data-click="{&quot;act&quot;: &quot;card_open_koubei_wall&quot;}" target="_blank" style="display: none;">进入真相墙 &gt;</a> -->
@@ -202,7 +202,7 @@
                     <a href="/index.php?app=web&act=index-add" style="display: block;" ><div class="ibx-even editCard" id="editCard">
                         <div class="ibx-inner editCard-inner">
                             <div class="editCard-inner-add"></div>
-                            <div class="editCard-inner-tip"><i ></i><p>添加卡片{{selected}}</p></div>
+                            <div class="editCard-inner-tip"><i ></i><p>添加卡片</p></div>
                         </div>
                       
                         </div>
@@ -219,7 +219,10 @@ export default {
     return {
       name: ' ',
       tag: false,
+      url: '',
       selected: 1,
+      is_tj: 1,
+      is_th: 1,
       item: '',
       video: '',
       think: '',
@@ -234,28 +237,36 @@ export default {
     }
   },
   mounted () {
-    const url = this.sit+'/index.php?app=web&act=index-initDATAT'
-    this.$store.dispatch('get_qqtj', {url: url, pid: 7}).then(res => {
+    this.url = this.sit+'/index.php?app=web&act=index-initDATAT'
+    this.$store.dispatch('get_qqtj', {url: this.url, pid: 7}).then(res => {
       if (!this.$store.getters.homeitem) {
         this.item = JSON.parse(getsessionStorage('get_item'))
       } else {
         this.item = this.$store.getters.homeitem
       }  
     })
-    this.$store.dispatch('get_qqtj', {url: url, pid: 4}).then(res => {
+    this.$store.dispatch('get_qqtj', {url: this.url, pid: 4}).then(res => {
       if (!this.$store.getters.homeitem) {
         this.video = JSON.parse(getsessionStorage('get_video'))
       } else {
         this.video = this.$store.getters.homeitem
       }  
     })
-    this.$store.dispatch('get_qqtj', {url: url, pid: 9}).then(res => {
+    this.$store.dispatch('get_qqtj', {url: this.url, pid: 9}).then(res => {
       if (!this.$store.getters.homeitem) {
         this.think = JSON.parse(getsessionStorage('get_think'))
       } else {
         this.think = this.$store.getters.homeitem
       }  
     })
+  },
+  methods: {
+    changetab(parma, pid, obj) {
+      this.$store.dispatch('get_qqtj', {url: this.url, pid: pid}).then(res => {
+      this.$set(this,parma,this.$store.getters.homeitem)
+      this.$set(this,obj.key,obj.value)
+      })
+    }
   }
 }
 </script>
