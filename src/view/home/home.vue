@@ -31,7 +31,7 @@
                     <div class="ibx-hai-title ibx-hai-tool">工具</div>
                 </li>
                 <li class="ibx-header-app-item clr">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="http://www.baidu.com/?fr=ibaidu">搜索</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN">搜索</a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <div class="ibx-hai-space"></div>
@@ -51,10 +51,10 @@
                     <div class="ibx-hai-space"></div>
                 </li>
                 <li class="ibx-header-app-item">
-                    <div class="ibx-hai-title ibx-hai-life">分类</div>
+                    <div class="ibx-hai-title ibx-hai-life">文档</div>
                 </li>
                 <li class="ibx-header-app-item">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;ditu&quot;}" target="_blank" href="http://map.baidu.com/?fr=ibaidu">地理</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;ditu&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN/component/installation">element-ui</a></span>
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;licai&quot;}" target="_blank" href="https://licai.baidu.com/user/0/center/0?fr=ibaidu">历史</a></span>
                 </li>
                 <li class="ibx-header-app-item">
