@@ -1,13 +1,24 @@
+/* eslint-disable vue/require-v-for-key */
 <template lang="html">
 <div class="main-wrap">
         <header data-click="{&quot;mod&quot;:&quot;header&quot;}">
             <div class="header-stackup" data-scroll-reveal="enter from the top over 0.66s" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
                 <div class="ibx-container row clr" id="toubu">
                     <a href="http://i.baidu.com/" target="_self" class="header-logo header-logo-index"></a>
-                    <div class="header-tool header-tool-user">
-                        <a class="header-tu-img header-tool-user-nick" href="/index.php?app=web&act=index-login">
-                            请登录                        </a>
-                                            </div>
+                    <div class="header-tool header-tool-user" v-if="this.username">
+                        <a class="header-tu-img header-tool-user-nick" >
+                            {{this.username}}
+                        </a>
+                        <div class="header-tc-content" style="display: block;">
+                            <a class="header-tuc-logout" @click="logout">
+                            退出帐号</a>
+                        </div>
+                    </div>
+                    <div class="header-tool header-tool-user" v-else>
+                        <a class="header-tu-img header-tool-user-nick" >
+                            <router-link to="/login">请登录</router-link> 
+                        </a>
+                    </div>
                     <div class="header-tool header-tool-news">
                         <a href="http://i.baidu.com/msg/messages/list/" class="header-tool-news-num">消息</a>
                     </div>
@@ -136,7 +147,7 @@
                         </div>
                         <div id="hot-video" class="my-video">
                             <ul class="ibx-video-list" style="width: 2868px; left: 0px;" id="hot-video1">
-                            <li class="ibx-video-item" v-for="(value, key, index) in video"><a target="_blank" :href="value.url"><img v-bind:src="sit+value.thumb" :alt="value.title" width="130"></a><div class="ibx-video-detail"><em class="ibx-video-dtitle-rank front ">{{key+1}}</em><a target="_blank" class="ibx-video-dtitle" :href="value.url" :title="value.title">{{value.title}}</a><label class="ibx-video-actor" :title="key">{{key}}</label><label class="ibx-video-tag" :title="value.type">{{value.type}}</label></div></li>
+                            <li class="ibx-video-item" v-for="(value, key) in video"><a target="_blank" :href="value.url"><img v-bind:src="sit+value.thumb" :alt="value.title" width="130"></a><div class="ibx-video-detail"><em class="ibx-video-dtitle-rank front ">{{key+1}}</em><a target="_blank" class="ibx-video-dtitle" :href="value.url" :title="value.title">{{value.title}}</a><label class="ibx-video-actor" :title="key">{{key}}</label><label class="ibx-video-tag" :title="value.type">{{value.type}}</label></div></li>
                             </ul>
                         </div>
                         <div class="ibx-video-mask"></div>
@@ -193,7 +204,7 @@
                            <!--  <a href="http://koubei.baidu.com/home?fr=ibaidu" class="OP_LOG_TITLE enter-koubei-link koubei-home-link" data-click="{&quot;act&quot;: &quot;card_open_koubei_home&quot;}" target="_blank" style="display: inline;">进入我的口碑 &gt;</a> -->
                             </div></div><div class="ibx-inner-content" id="ibx-koubei"><div id="koubei-mine-container" class="koubei-mine-container "><div class="koubei-mine-top"><div class="ibx-card-pager"><span class="ibx-card-pager-prev"></span><span class="ibx-card-pager-item current" data-page="0"></span><span class="ibx-card-pager-item" data-page="1"></span><span class="ibx-card-pager-item" data-page="2"></span><span class="ibx-card-pager-next"></span></div></div><div id="koubei-mine-list">
                             <ul class="koubei-mine-list"  >
-                            <li class="koubei-mine-item" v-for="(value, key, index) in think"><div class="koubei-mine-item-container"><p class="koubei-mine-item-title"><a class="OP_LOG_TITLE" target="_blank" :title="value.title" :href="value.url" data-click="{&quot;act&quot;: &quot;card_koubei_item_message&quot;}" v-html="value.tag"></a></p><span class="koubei-mine-item-time">{{value.date}}</span></div></li>
+                            <li class="koubei-mine-item" v-for="(value) in think"><div class="koubei-mine-item-container"><p class="koubei-mine-item-title"><a class="OP_LOG_TITLE" target="_blank" :title="value.title" :href="value.url" data-click="{&quot;act&quot;: &quot;card_koubei_item_message&quot;}" v-html="value.tag"></a></p><span class="koubei-mine-item-time">{{value.date}}</span></div></li>
                             </ul>
                             </div></div></div></div>
                     </div>
@@ -212,7 +223,7 @@
             </div>
 </template>
 <script>
-import { getsessionStorage } from '@/utils/sessionStorage'
+import { getsessionStorage, removesessionStorage } from '@/utils/sessionStorage'
 export default {
   name: 'home',
   data () {
@@ -226,18 +237,20 @@ export default {
       item: '',
       video: '',
       think: '',
-      sit:''
+      sit: '',
+      username: ''
     }
   },
   created () {
-    if(process.env.BASE_API  == 'undefined'){
+    if (process.env.BASE_API === 'undefined') {
       this.sit = ''
     } else {
       this.sit = process.env.BASE_API
     }
   },
   mounted () {
-    this.url = this.sit+'/index.php?app=web&act=index-initDATAT'
+    this.username = getsessionStorage('username')
+    this.url = this.sit + '/index.php?app=web&act=index-initDATAT'
     this.$store.dispatch('get_qqtj', {url: this.url, pid: 7}).then(res => {
       if (!this.$store.getters.homeitem) {
         this.item = JSON.parse(getsessionStorage('get_item'))
@@ -261,11 +274,15 @@ export default {
     })
   },
   methods: {
-    changetab(parma, pid, obj) {
+    changetab (parma, pid, obj) {
       this.$store.dispatch('get_qqtj', {url: this.url, pid: pid}).then(res => {
-      this.$set(this,parma,this.$store.getters.homeitem)
-      this.$set(this,obj.key,obj.value)
+        this.$set(this, parma, this.$store.getters.homeitem)
+        this.$set(this, obj.key, obj.value)
       })
+    },
+    logout () {
+      removesessionStorage('username')
+      this.username = ''
     }
   }
 }

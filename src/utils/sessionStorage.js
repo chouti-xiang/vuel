@@ -1,13 +1,12 @@
 
-
-export function getsessionStorage(key) {
+export function getsessionStorage (key) {
   return sessionStorage.getItem(key)
 }
 
-export function setsessionStorage(key, value) {
+export function setsessionStorage (key, value) {
   return sessionStorage.setItem(key, value)
 }
 
-// export function removeToken() {
-//   return Cookies.remove(TokenKey)
-// }
+export function removesessionStorage (key) {
+  return sessionStorage.clear(key)
+}

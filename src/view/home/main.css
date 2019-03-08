@@ -422,7 +422,7 @@ body{background-color:#eee}
 .editCard-inner:active{color:#000}
 .editCard-inner:active .editCard-inner-add{background-position:center -301px}
 .editCard-inner-first:hover{height:331px}
-/*.editCard-inner-add{background:url(img/add_cal.png) center 0 no-repeat;margin-top:108px;height:50px;margin-bottom:35px}*/
+.editCard-inner-add{margin-top:108px;height:50px;margin-bottom:35px}
 .ibx-inner-card-title{position:relative;height:18px;line-height:18px;*zoom:1;margin-bottom:16px}
 .ibx-inner-card-title:after,.ibx-inner-card-title:before{display:table;content:""}
 .ibx-inner-card-title:after{clear:both}
@@ -431,7 +431,7 @@ body{background-color:#eee}
 .ibx-card-pager{position:absolute;right:0;bottom:0;*zoom:1;padding-left:10px;background-color:#fff;z-index:10}
 .ibx-card-pager:after,.ibx-card-pager:before{display:table;content:""}
 .ibx-card-pager:after{clear:both}
-/*.ibx-card-pager span{float:left;width:18px;height:18px;margin-left:5px;background:url(img/icon_v4.png) 0 0 no-repeat;cursor:pointer}*/
+.ibx-card-pager span{float:left;width:18px;height:18px;margin-left:5px;cursor:pointer}
 .ibx-card-pager .ibx-card-pager-prev{background-position:0 0}
 .ibx-card-pager .ibx-card-pager-prev:hover{background-position:0 -60px}
 .ibx-card-pager .ibx-card-pager-next{background-position:0 -30px}
@@ -1389,7 +1389,7 @@ a.ibx-cal-dical-timetype:hover{text-decoration:underline}
 .ibx-header-app{max-width:97%;margin:0 auto;overflow:hidden}
 .ibx-header-app-item{list-style:none;float:left;width:auto;min-width:4.1%;width:4.1%;padding:16px 0;height:48px;text-align:left}
 .ibx-header-app-item>.ibx-hai-link:first-child{margin-top:-4px;margin-bottom:3px}
-/*.ibx-hai-title{padding-top:26px;height:22px;line-height:18px;font-size:14px;color:#4a5d76;background:url(img/header_app_icon.png) 0 0 no-repeat}*/
+.ibx-hai-title{padding-top:26px;height:22px;line-height:18px;font-size:14px;color:#4a5d76;background:url(../../assets/header_app_icon.png) 0 0 no-repeat}
 .ibx-hai-title.ibx-hai-tool{background-position:2px 1px}
 .ibx-hai-title.ibx-hai-sns{background-position:2px -79px}
 .ibx-hai-title.ibx-hai-life{background-position:2px -159px}
@@ -1428,3 +1428,7 @@ a.ibx-cal-dical-timetype:hover{text-decoration:underline}
 	width: 32px;
 	height: 32px;
 }
+.editCard-inner-tip i{clear: both;}
+.editCard-inner-tip i{display: inline-block;width: 48px;height: 48px;position: relative;}
+.editCard-inner-tip i:before{width: 40px;height: 4px;left: 4px;top: 22px;content: "";display: block;position: absolute;background-color: #43b548;}
+.editCard-inner-tip i:after{width: 4px;height: 40px;left: 22px;top: 4px;content: "";display: block;position: absolute;background-color: #43b548;}
