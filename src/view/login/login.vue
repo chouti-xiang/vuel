@@ -1,17 +1,27 @@
 <template lang="html">
-<div class="main">
+<div class="main" style="width:460px">
     <h1>登录</h1>
-<div class="login">
-    <el-input
-    placeholder="请选择日期"
-    suffix-icon="el-icon-date"
-    v-model="name">
+<el-form ref="form" :model="form" label-width="80px" >
+  <el-form-item label="用户名">
+  <el-input 
+  v-model="form.name"
+  placeholder="输入你的帐号"
+  clearable>
   </el-input>
- 
-  用户名: <input type="text" name="name" v-model="name"/><br>
-  密码: <input type="password" name="password" v-model="password" /><br>
-  <input type="submit" value="提交" @click="submit"/>
-</div>
+  </el-form-item>
+  <el-form-item label="密码">
+   <el-input 
+  v-model="form.password"
+  placeholder="输入你的密码"
+  show-password
+  clearable
+  @keyup.enter.native="onSubmit">
+  </el-input>
+  </el-form-item>
+  <el-form-item>
+      <el-button type="primary" @click="onSubmit">提交</el-button>
+  </el-form-item>
+</el-form>
 </div>
 </template>
 <script>
@@ -19,8 +29,10 @@ export default {
   name: 'login',
   data () {
     return {
-      name: '',
-      password: '',
+      form: {
+        name: '',
+        password: ''
+      },
       sit: ''  
     }
   },
@@ -32,9 +44,9 @@ export default {
     }
   },
   methods: {
-    submit () {
+    onSubmit () {
       const url = this.sit + '/index.php?app=web&act=index-check'
-      this.$store.dispatch('loginUser', {url: url, name: this.name, password: this.password}).then((res) => {
+      this.$store.dispatch('loginUser', {url: url, name: this.form.name, password: this.form.password}).then((res) => {
         this.$router.push('/')
       }).catch((error) => {
 
