@@ -223,7 +223,7 @@
             </div>
 </template>
 <script>
-import { getsessionStorage, removesessionStorage } from '@/utils/sessionStorage'
+import { getCookieStorage, removeCookieStorage } from '@/utils/cookieStorage'
 export default {
   name: 'home',
   data () {
@@ -249,7 +249,7 @@ export default {
     }
   },
   mounted () {
-    this.username = getsessionStorage('username')
+    this.username = getCookieStorage('username')
     this.url = this.sit + '/index.php?app=web&act=index-initDATAT'
     this.$store.dispatch('get_qqtj', {url: this.url, pid: 7}).then(res => {
       if (!this.$store.getters.homeitem) {
@@ -281,7 +281,7 @@ export default {
       })
     },
     logout () {
-      removesessionStorage('username')
+      removeCookieStorage('username')
       this.username = ''
     }
   }
