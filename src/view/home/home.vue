@@ -210,12 +210,13 @@
                     </div>
                 </div>
                                                 <div data-scroll-reveal="" class="col span_4_2 OP_LOG_LINK" data-click="{&quot;mod&quot;:&quot;card_mgr&quot;,&quot;act&quot;:&quot;msg_click&quot;}" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
-                    <a href="/index.php?app=web&act=index-add" style="display: block;" ><div class="ibx-even editCard" id="editCard">
+                    <a href="#" style="display: block;" ><div class="ibx-even editCard" id="editCard">
+                        <router-link to="/add">
                         <div class="ibx-inner editCard-inner">
                             <div class="editCard-inner-add"></div>
                             <div class="editCard-inner-tip"><i ></i><p>添加卡片</p></div>
                         </div>
-                      
+                        </router-link>
                         </div>
                        </a>
                     </div>
