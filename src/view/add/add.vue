@@ -6,7 +6,7 @@
         <div><input type="text" ref="title" placeholder="请在这里输入标题" class="title" v-model="title"/></div>
         <div><input type="text"  placeholder="请输入作者"  class="author" v-model="author"/></div>
         <div id="editor"></div>
-
+<WysiwygEditor @input="geteditor"  />
         <div class="tx-tj-qt">
             <div class="tx-tj-qt-titile">封面和摘要</div>
             <div>
@@ -38,7 +38,6 @@
     </div>
 </div>
 </template>
-
 
 <style>
 #tx-tj{top:80px ;position:absolute;margin:0 auto;z-index: 160;left: 10%;}
@@ -79,117 +78,34 @@
     #editor{display: table;width: 100%} 
 </style>
 <script>
-import 'codemirror/lib/codemirror.css' // codemirror
-import 'tui-editor/dist/tui-editor.css' // editor ui
-import 'tui-editor/dist/tui-editor-contents.css' // editor content
- import Editor from 'tui-editor'
-  import editorEvents from './editorEvents';
-import editorDefaultOptions from './editorDefaultOptions';
+import WysiwygEditor from '@/components/WysiwygEditor'
 export default {
   name: 'add',
-  props: {
-        previewStyle: {
-            type: String,
-            default: 'tab'
-        },
-        height: {
-            type: String,
-            default: '400px'
-        },
-        value: {
-            type: String,
-            default: ''
-        },
-        mode: {
-            type: String,
-            default: 'wysiwyg'
-        },
-        options: {
-            type: Object,
-            default() {
-                return editorDefaultOptions;
-            }
-        },
-        html: {
-            type: String
-        },
-        visible: {
-            type: Boolean,
-            default: true
-        }
-    },
+  components: {WysiwygEditor},
   data () {
     return {
-      editor: '',
-      content: ''
+      content: '',
+      id: ''
     }
   },
-  computed: {
-        editorOptions() {
-            const options = Object.assign({}, editorDefaultOptions, this.options);
-            options.initialValue = this.value;
-            options.initialEditType = this.mode;
-            options.height = this.height;
-            options.previewStyle = this.previewStyle;
-            return options;
-        }
-    },
   mounted () {
     if (process.env.BASE_API === 'undefined') {
       this.sit = ''
     } else {
       this.sit = process.env.BASE_API
     }
-
-   
-     const eventOption = {};
-        editorEvents.forEach(event => {
-            eventOption[event] = (...args) => {
-                this.$emit(event, ...args);
-            };
-        });
-        const options = Object.assign(this.editorOptions, {
-            el: document.getElementById('editor'),
-            events: eventOption
-        });
-        this.editor = new Editor(options);
-   this.editor.on('change', () => {
-    this.content = this.editor.getHtml();
-        this.$emit('input', this.editor.getValue())
-    })
-
-   const url = this.sit + '/index.php?app=web&act=index-getArticle'
-   this.$store.dispatch('getArticle', {url: url,id: 50}).then(res => {
-    console.log(this.$store.getters.article)
-    this.editor.setValue('111')
-    this.editor.setHtml(this.$store.getters.article.content)
-   }).catch((error) => {
-
-   })
   },
   methods: {
     onSubmit () {
       const url = this.sit + '/index.php?app=web&act=index-pullArticle'
       this.$store.dispatch('addArticle', {url: url, content: this.content}).then((res) => {
-        console.log(res)
       }).catch((error) => {
-
+        console.log(error)
       })
     },
-    setValue(value) {
-      this.editor.setValue(value)
-    },
-    getValue() {
-      console.log(111)
-      return this.editor.getValue()
-    },
-    setHtml(value) {
-      alert(111)
-      this.editor.setHtml(value)
-    },
-    getHtml() {
-      console.log(this.editor.getHtml())
-      return this.editor.getHtml()
+    geteditor (data) {
+      this.content = data
+      console.log(this.content)
     }
   }
   

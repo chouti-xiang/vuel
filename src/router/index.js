@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// import componentsRouter from './modules/components'
 Vue.use(Router)
 
 export default new Router({
