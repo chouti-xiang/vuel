@@ -210,12 +210,13 @@
                     </div>
                 </div>
                                                 <div data-scroll-reveal="" class="col span_4_2 OP_LOG_LINK" data-click="{&quot;mod&quot;:&quot;card_mgr&quot;,&quot;act&quot;:&quot;msg_click&quot;}" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
-                    <a href="/index.php?app=web&act=index-add" style="display: block;" ><div class="ibx-even editCard" id="editCard">
+                    <a href="#" style="display: block;" ><div class="ibx-even editCard" id="editCard">
+                        <router-link to="/add">
                         <div class="ibx-inner editCard-inner">
                             <div class="editCard-inner-add"></div>
                             <div class="editCard-inner-tip"><i ></i><p>添加卡片</p></div>
                         </div>
-                      
+                        </router-link>
                         </div>
                        </a>
                     </div>
@@ -223,7 +224,7 @@
             </div>
 </template>
 <script>
-import { getsessionStorage, removesessionStorage } from '@/utils/sessionStorage'
+import { getCookieStorage, removeCookieStorage } from '@/utils/cookieStorage'
 export default {
   name: 'home',
   data () {
@@ -249,7 +250,7 @@ export default {
     }
   },
   mounted () {
-    this.username = getsessionStorage('username')
+    this.username = getCookieStorage('username')
     this.url = this.sit + '/index.php?app=web&act=index-initDATAT'
     this.$store.dispatch('get_qqtj', {url: this.url, pid: 7}).then(res => {
       if (!this.$store.getters.homeitem) {
@@ -281,7 +282,7 @@ export default {
       })
     },
     logout () {
-      removesessionStorage('username')
+      removeCookieStorage('username')
       this.username = ''
     }
   }

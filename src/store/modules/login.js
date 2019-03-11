@@ -1,4 +1,4 @@
-import { setsessionStorage } from '@/utils/sessionStorage'
+import { setCookieStorage } from '@/utils/cookieStorage'
 import { requestUser } from '@/api/home'
 const login = {
   state: {
@@ -14,7 +14,7 @@ const login = {
       return new Promise((resolve, reject) => {
         requestUser(data).then(res => {
           commit('GET_USERS', res)
-          setsessionStorage('username', data.name)
+          setCookieStorage('username', data.name)
           resolve()
         })
           .catch(

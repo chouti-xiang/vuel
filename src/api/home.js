@@ -17,3 +17,9 @@ export function request (data) {
 export function requestUser (data) {
   return axios.post(data.url, qs.stringify({name: data.name, password: data.password}))
 }
+export function requestArticle (data) {
+  return axios.post(data.url, qs.stringify({content: data.content}))
+}
+export function responseArticle (data) {
+  return axios.post(data.url, qs.stringify({id: data.id}))
+}
