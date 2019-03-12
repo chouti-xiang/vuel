@@ -15,7 +15,13 @@ export function request (data) {
     pid: data.pid}))
 }
 export function requestUser (data) {
-  return axios.post(data.url, qs.stringify({name: data.name, password: data.password}))
+  const O = {}
+  for (let i in data) {
+    if (i !== 'url') {
+      O[i] = data[i]
+    } 
+  }
+  return axios.post(data.url, qs.stringify(O))
 }
 export function requestArticle (data) {
   return axios.post(data.url, qs.stringify({content: data.content}))

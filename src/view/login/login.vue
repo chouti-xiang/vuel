@@ -49,7 +49,7 @@ export default {
       this.$store.dispatch('loginUser', {url: url, name: this.form.name, password: this.form.password}).then((res) => {
         this.$router.push('/')
       }).catch((error) => {
-
+        console.log(error)
       })
     }
   }
