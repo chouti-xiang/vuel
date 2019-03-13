@@ -10,11 +10,11 @@ import qs from 'qs'
 // }
 // export default home
  
+// export function request (data) {
+//   return axios.post(data.url, qs.stringify({
+//     pid: data.pid}))
+// }
 export function request (data) {
-  return axios.post(data.url, qs.stringify({
-    pid: data.pid}))
-}
-export function requestUser (data) {
   const O = {}
   for (let i in data) {
     if (i !== 'url') {
@@ -22,10 +22,4 @@ export function requestUser (data) {
     } 
   }
   return axios.post(data.url, qs.stringify(O))
-}
-export function requestArticle (data) {
-  return axios.post(data.url, qs.stringify({content: data.content}))
-}
-export function responseArticle (data) {
-  return axios.post(data.url, qs.stringify({id: data.id}))
 }

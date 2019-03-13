@@ -1,18 +1,18 @@
 import { request } from '@/api/request'
-const add = {
+const article = {
   state: {
-    categray: ''
+    article: ''
   },
   mutations: {
-    GET_CATEGRAY: (state, data) => {
-      state.categray = data
+    GET_ARTICLE: (state, data) => {
+      state.article = data
     }
   },
   actions: {
-    getCategray ({commit}, data) {
+    getArticle ({commit}, data) {
       return new Promise((resolve, reject) => {
         request(data).then(res => {
-          commit('GET_CATEGRAY', res.data.data)
+          commit('GET_ARTICLE', res.data.data[0])
           resolve()
         })
           .catch(
@@ -24,4 +24,4 @@ const add = {
     }
   }
 }
-export default add 
+export default article 

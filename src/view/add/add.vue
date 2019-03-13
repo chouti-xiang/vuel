@@ -13,7 +13,7 @@
           </div>
         <div>
                     <el-input 
-  v-model="form.autor"
+  v-model="form.author"
   size="small " 
   placeholder="请输入作者"
   clearable>
@@ -50,16 +50,27 @@
         <div class="tx-tj-category">
             <div class="tx-tj-qt-titile">分类名称</div>
             <div>
-            <select v-model="selected" name="category" @change="getPid">
-                <option value="">选择一个分类</option>
-                <option value="1">媒体空间</option>
-                <option value="2">百家讲坛</option>
-                <option value="3">醍醐灌顶</option>
-            </select>
-            <select name="category" v-model="selectedC">
-                <option value="">选择一个分类</option>
-                <option v-for="(value, key, index) in FIDDATA" :value="value.id">{{value.cname}}</option>
-            </select>
+              <el-select v-model="SelectValue1"  placeholder="请选择" @change="getCategray">
+    <el-option
+      v-for="item in options"
+      :key="item.id"
+      :label="item.cname"
+      :value="item.id">
+    </el-option>
+  </el-select>
+  <el-select
+    v-model="form.columnId"
+    collapse-tags
+    style="margin-left: 20px;"
+    placeholder="请选择"
+    >
+    <el-option
+      v-for="item in options2"
+      :key="item.id"
+      :label="item.cname"
+      :value="item.id">
+    </el-option>
+  </el-select>
             </div>
         </div>
         <div>来源</div>
@@ -137,17 +148,26 @@ export default {
   components: {WysiwygEditor},
   data () {
     return {
-      content: '',
       sit: '',
       id: '',
       imageUrl: '',
       url: '',
-      urlPath: '',
+      options: '',
+      options2: '',
+      SelectValue1: '',
       form: {
         title: '',
         author: '',
-        description: ''
+        description: '',
+        columnId: '',
+        thumb: '',
+        content: ''
       }
+    }
+  },
+  computed: {
+    s: function () {
+      return this.SelectValue1
     }
   },
   mounted () {
@@ -157,20 +177,26 @@ export default {
       this.sit = process.env.BASE_API
     }
     this.url = this.sit + '/index.php?app=web&act=index-imgup'
+    let SelectUrl = this.sit + '/index.php?app=web&act=index-getPID'
+    this.$store.dispatch('getCategray', {url: SelectUrl, pid: 0}).then((res) => {
+      this.options = this.$store.getters.categray
+    }).catch((error) => {
+      console.log(error)
+    })
   },
   methods: {
     onSubmit () {
       const url = this.sit + '/index.php?app=web&act=index-pullArticle'
-      this.$store.dispatch('addArticle', {url: url, content: this.content}).then((res) => {
+      this.$store.dispatch('addArticle', {url: url, content: this.form}).then((res) => {
       }).catch((error) => {
         console.log(error)
       })
     },
     geteditor (data) {
-      this.content = data
+      this.form.content = data
     },
     handleAvatarSuccess (res, file) {
-      this.urlPath = res
+      this.form.thumb = res
       this.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload (file) {
@@ -184,9 +210,14 @@ export default {
       }
       return isJPG && isLt2M
     },
-    cancelUpload (file) {
-      console.log(1111)
-      console.log(file)
+    getCategray () {
+      this.form.columnId = null
+      let SelectUrl = this.sit + '/index.php?app=web&act=index-getPID'
+      this.$store.dispatch('getCategray', {url: SelectUrl, pid: this.SelectValue1}).then((res) => {
+        this.options2 = this.$store.getters.categray
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
   

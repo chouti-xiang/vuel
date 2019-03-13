@@ -204,7 +204,7 @@
                            <!--  <a href="http://koubei.baidu.com/home?fr=ibaidu" class="OP_LOG_TITLE enter-koubei-link koubei-home-link" data-click="{&quot;act&quot;: &quot;card_open_koubei_home&quot;}" target="_blank" style="display: inline;">进入我的口碑 &gt;</a> -->
                             </div></div><div class="ibx-inner-content" id="ibx-koubei"><div id="koubei-mine-container" class="koubei-mine-container "><div class="koubei-mine-top"><div class="ibx-card-pager"><span class="ibx-card-pager-prev"></span><span class="ibx-card-pager-item current" data-page="0"></span><span class="ibx-card-pager-item" data-page="1"></span><span class="ibx-card-pager-item" data-page="2"></span><span class="ibx-card-pager-next"></span></div></div><div id="koubei-mine-list">
                             <ul class="koubei-mine-list"  >
-                            <li class="koubei-mine-item" v-for="(value) in think"><div class="koubei-mine-item-container"><p class="koubei-mine-item-title"><a class="OP_LOG_TITLE" target="_blank" :title="value.title" :href="value.url" data-click="{&quot;act&quot;: &quot;card_koubei_item_message&quot;}" v-html="value.tag"></a></p><span class="koubei-mine-item-time">{{value.date}}</span></div></li>
+                            <li class="koubei-mine-item" v-for="(value) in think"><div class="koubei-mine-item-container"><p class="koubei-mine-item-title"><a class="OP_LOG_TITLE" target="_blank" :title="value.title"  data-click="{&quot;act&quot;: &quot;card_koubei_item_message&quot;}"> <router-link :to="{ name: 'article', params: { id: value.id }}">{{value.title}}</router-link></a></p><span class="koubei-mine-item-time">{{value.date}}</span></div></li>
                             </ul>
                             </div></div></div></div>
                     </div>
@@ -225,6 +225,7 @@
 </template>
 <script>
 import { getCookieStorage, removeCookieStorage } from '@/utils/cookieStorage'
+import { getsessionStorage } from '@/utils/sessionStorage'
 export default {
   name: 'home',
   data () {
@@ -248,6 +249,7 @@ export default {
     } else {
       this.sit = process.env.BASE_API
     }
+    this.id = this.$route.query.id
   },
   mounted () {
     this.username = getCookieStorage('username')

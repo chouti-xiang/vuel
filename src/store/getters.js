@@ -1,6 +1,7 @@
 const getters = {
   homeitem: state => state.home.item,
-  article: state => state.add.data1
+  categray: state => state.add.categray,
+  article: state => state.article.article
 }
 
 export default getters
