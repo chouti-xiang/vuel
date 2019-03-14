@@ -9,6 +9,17 @@ const add = {
     }
   },
   actions: {
+    addArticle ({commit}, data) {
+      return new Promise((resolve, reject) => {
+        request(data).then(res => {
+          resolve()
+        })
+          .catch(
+            error => {
+              reject(error)
+            })
+      })  
+    },
     getCategray ({commit}, data) {
       return new Promise((resolve, reject) => {
         request(data).then(res => {

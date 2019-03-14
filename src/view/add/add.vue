@@ -1,6 +1,12 @@
 <template lang="html">
 <div class="main">
   <!-- 添加新页卡 bengin-->
+  <el-alert
+    title="抽屉箱系列，这里是发烧友根据自身情况制定的免费使用场所，能够体验记录，收集，交流，空间，在这里你可以添加文章，投放到不同的页卡中去，
+    产品会不断的完善中"
+    type="success">
+  </el-alert>
+      <el-form ref="form" :model="form" label-width="65px">
         <div id="tx-tj">
          <div class="tx-tj-tj">
         <div>
@@ -73,16 +79,28 @@
   </el-select>
             </div>
         </div>
-        <div>来源</div>
-        <div><button @click="onSubmit">提交</button></div>
+        <div>
+      
+          <el-form-item label="来源" style="margin-top:20px">
+ <el-input 
+  v-model="form.url"
+  size="medium"
+  clearable
+  style="width:50%">
+  </el-input>
+</el-form-item>
+
+        </div>
+        <div style="text-align: center;"><el-button type="primary" @click="onSubmit">提交</el-button></div>
         </div>
     </div>
+    </el-form>
 </div>
 </template>
 
 <style>
 #tx-tj{top:80px ;position:absolute;margin:0 auto;z-index: 160;left: 10%;}
-  .tx-tj-tj{width: 1000px;margin:0 auto;background-color: white;border-left:1px solid #ddd;border-right:1px solid #ddd;}
+  .tx-tj-tj{width: 1000px;margin:0 auto;background-color: white;border-left:1px solid #ddd;border-right:1px solid #ddd;border-bottom: 1px solid #ddd;padding: 0 0 10px 0;}
   .tx-tj-qt{border-top: 1px solid #ebebeb;padding: 10px 10px 25px 10px ;display: table;}
   .tx-tj-qt .tx-tj-qt-titile{margin:15px 0;}
   .title{ margin: 2px 0;padding-right: 98px;box-sizing: border-box;font-size: 24px;font-weight: 500;height: 46px;line-height: 46px;width: 100%;background-color: transparent;border: 0;outline: 0;padding-left: 7px;}

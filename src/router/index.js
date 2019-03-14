@@ -22,7 +22,7 @@ export default new Router({
       component: () => import('@/view/add/add')
     },
     {
-      path: '/article/?id=:id',
+      path: '/article/:id',
       name: 'article',
       component: () => import('@/view/article/article')
     },
