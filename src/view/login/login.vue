@@ -47,7 +47,13 @@ export default {
     onSubmit () {
       const url = this.sit + '/index.php?app=web&act=index-check'
       this.$store.dispatch('loginUser', {url: url, name: this.form.name, password: this.form.password}).then((res) => {
-        this.$router.push('/')
+        if (res.data.flag) {
+          this.$router.push('/')
+        } else {
+          this.$alert(res.data.data, '错误原因', {
+            confirmButtonText: '确定'
+          })
+        }
       }).catch((error) => {
         console.log(error)
       })

@@ -35,8 +35,7 @@
           :action="url"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
-          :on-remove="cancelUpload">
+          :before-upload="beforeAvatarUpload">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
@@ -161,6 +160,11 @@
 </style>
 <script>
 import WysiwygEditor from '@/components/WysiwygEditor'
+import { getCookieStorage, removeCookieStorage } from '@/utils/cookieStorage'
+let username = getCookieStorage('username')
+if (!username) {
+  location = '/'
+}
 export default {
   name: 'add',
   components: {WysiwygEditor},
@@ -182,6 +186,17 @@ export default {
         content: ''
       }
     }
+  },
+  beforeCreate: function () {
+    // let username = getCookieStorage('username')
+    // if (!username) {
+    //   this.$alert('没有登录', '错误原因', {
+    //     confirmButtonText: '确定',
+    //     callback: action => {
+    //       location = '/'
+    //     }
+    //   })
+    // }
   },
   computed: {
     s: function () {

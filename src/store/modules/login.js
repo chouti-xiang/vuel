@@ -14,8 +14,10 @@ const login = {
       return new Promise((resolve, reject) => {
         request(data).then(res => {
           commit('GET_USERS', res)
-          setCookieStorage('username', data.name)
-          resolve()
+          if (res.data.flag) {
+            setCookieStorage('username', data.name)
+          }
+          resolve(res)
         })
           .catch(
             error => {

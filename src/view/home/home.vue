@@ -1,4 +1,3 @@
-/* eslint-disable vue/require-v-for-key */
 <template lang="html">
 <div class="main-wrap">
         <header data-click="{&quot;mod&quot;:&quot;header&quot;}">
@@ -31,7 +30,7 @@
                     <div class="ibx-hai-title ibx-hai-tool">工具</div>
                 </li>
                 <li class="ibx-header-app-item clr">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN">搜索</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN"><router-link to="/tools">搜索</router-link></a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <div class="ibx-hai-space"></div>
@@ -44,7 +43,7 @@
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;baike&quot;}" target="_blank" href="http://baike.baidu.com/usercenter?fr=ibaidu">谷歌</a></span>
                 </li>
                 <li class="ibx-header-app-item">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;zhidao&quot;}" target="_blank" href="http://zhidao.baidu.com/uhome?fr=ibaidu">阿里</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;zhidao&quot;}" target="_blank" href="https://www.aliyun.com/">阿里云</a></span>
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;wenku&quot;}" target="_blank" href="http://wenku.baidu.com/user/index?fr=ibaidu">教育</a></span>
                 </li>
                 <li class="ibx-header-app-item">
@@ -55,7 +54,7 @@
                 </li>
                 <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;ditu&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN/component/installation">element-ui</a></span>
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;licai&quot;}" target="_blank" href="https://licai.baidu.com/user/0/center/0?fr=ibaidu">历史</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;licai&quot;}" target="_blank" href="https://www.cnblogs.com/hezihao/p/8072585.html">webpack</a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="http://www.nuomi.com/?cid=002544&amp;fr=ibaidu">财经</a></span>
@@ -220,9 +219,13 @@
                 </div>
             </div>
 </template>
+<style>
+    @import "main.css";
+</style>
 <script>
 import { getCookieStorage, removeCookieStorage } from '@/utils/cookieStorage'
 import { getsessionStorage } from '@/utils/sessionStorage'
+
 export default {
   name: 'home',
   data () {
@@ -287,6 +290,3 @@ export default {
   }
 }
 </script>
-<style>
-    @import "main.css"
-</style>
