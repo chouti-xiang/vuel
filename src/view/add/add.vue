@@ -159,7 +159,7 @@ export default {
     })
 
    const url = this.sit + '/index.php?app=web&act=index-getArticle'
-   this.$store.dispatch('getArticle', {url: url,id: 50}).then(res => {
+   this.$store.dispatch('getArticle', {url: url,id: 51}).then(res => {
     console.log(this.$store.getters.article)
     this.editor.setValue('111')
     this.editor.setHtml(this.$store.getters.article.content)
