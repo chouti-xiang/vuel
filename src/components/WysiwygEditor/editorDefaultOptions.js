@@ -2,7 +2,7 @@ export default {
   minHeight: '200px',
   language: 'en_US',
   useCommandShortcut: true,
-  useDefaultHTMLSanitizer: true,
+  useDefaultHTMLSanitizer: false,
   usageStatistics: true,
   hideModeSwitch: false,
   toolbarItems: [

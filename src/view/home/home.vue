@@ -1,4 +1,3 @@
-/* eslint-disable vue/require-v-for-key */
 <template lang="html">
 <div class="main-wrap">
         <header data-click="{&quot;mod&quot;:&quot;header&quot;}">
@@ -31,7 +30,7 @@
                     <div class="ibx-hai-title ibx-hai-tool">工具</div>
                 </li>
                 <li class="ibx-header-app-item clr">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN">搜索</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN"><router-link to="/tools">搜索</router-link></a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <div class="ibx-hai-space"></div>
@@ -44,7 +43,7 @@
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;baike&quot;}" target="_blank" href="http://baike.baidu.com/usercenter?fr=ibaidu">谷歌</a></span>
                 </li>
                 <li class="ibx-header-app-item">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;zhidao&quot;}" target="_blank" href="http://zhidao.baidu.com/uhome?fr=ibaidu">阿里</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;zhidao&quot;}" target="_blank" href="https://www.aliyun.com/">阿里云</a></span>
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;wenku&quot;}" target="_blank" href="http://wenku.baidu.com/user/index?fr=ibaidu">教育</a></span>
                 </li>
                 <li class="ibx-header-app-item">
@@ -55,7 +54,7 @@
                 </li>
                 <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;ditu&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN/component/installation">element-ui</a></span>
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;licai&quot;}" target="_blank" href="https://licai.baidu.com/user/0/center/0?fr=ibaidu">历史</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;licai&quot;}" target="_blank" href="https://www.cnblogs.com/hezihao/p/8072585.html">webpack</a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="http://www.nuomi.com/?cid=002544&amp;fr=ibaidu">财经</a></span>
@@ -132,8 +131,7 @@
                         <div class="ibx-inner-title" id='fenlei'>
                             <a  target="_blank" href="http://v.baidu.com/" class="ibx-inner-title-ctx">媒体空间</a>
                             <ul class="ibx-inner-title-tab">
-                                <!-- <li  class="ibx-inner-title-tabitem ibx-video-my OP_LOG_TITLE">我的分类</li> -->
-                                <li  class="ibx-inner-title-tabitem ibx-video-hotTop OP_LOG_TITLE current">亲情推荐</li>
+                                <li  class="ibx-inner-title-tabitem ibx-video-hotTop OP_LOG_TITLE current">个人推荐</li>
                             </ul>
                             <a herf='#' class="OP_LOG_TITLE card-enter-video-link" click='miniPrograme' >关注我的小程序</a>
                             <div style="width: 250px;height: 140px;position: absolute;right: 0;top: 50px;" v-if='tag'>
@@ -161,7 +159,7 @@
                     <div class="ibx-even">
                         <div class="ibx-inner" id="ibx-mod-xinwen">
                         <div class="ibx-inner-title">
-                            <a target="_blank" href="http://xinwen.baidu.com/" class="ibx-inner-title-ctx">激情推荐</a>
+                            <a target="_blank" href="#" class="ibx-inner-title-ctx">外引文章</a>
                             <ul class="ibx-inner-title-tab">
                                 <li data-click="{&quot;act&quot;: &quot;card_xinwen_pernews&quot;}" class="ibx-inner-title-tabitem ibx-xinwen-pernews OP_LOG_TITLE" @click="changetab('item', 7, {key:'is_tj',value:1})" v-bind:class="{'current':is_tj ==1}">工具类</li>
                                 <li data-click="{&quot;act&quot;: &quot;card_xinwen_hot&quot;}" class="ibx-inner-title-tabitem ibx-xinwen-hot OP_LOG_TITLE" @click="changetab('item', 8, {key:'is_tj',value:2})" v-bind:class="{'current':is_tj ==2}">生活类</li>
@@ -172,13 +170,13 @@
                             </div>
                         </div>
                         <div class="ibx-inner-content" id="ibx-xinwen">
-                        <div id="xinwen-pernews" class="xinwen-pernews"><div class="xinwen-common-tab"><div class="xinwen-normal-top"><span class="xinwen-normal-top-title">推荐鸡汤</span><span class="xinwen-normal-top-line"></span></div>
+                        <div id="xinwen-pernews" class="xinwen-pernews"><div class="xinwen-common-tab"><div class="xinwen-normal-top"><span class="xinwen-normal-top-title">个人推荐</span><span class="xinwen-normal-top-line"></span></div>
                         <!-- <div class="ibx-card-pager"><span class="ibx-card-pager-prev"></span><span class="ibx-card-pager-item current" data-page="0"></span><span class="ibx-card-pager-next"></span></div> -->
                         </div>
                         <div id="xinwen-pernews-main" class="xinwen-pernews-main">
                         <ul class="xinwen-normal-list xinwen-pernews-list" style="width: 976px; left: 0px;" id="hot_article">
                             <li class="xinwen-pernews-item"  v-for="article in item">
-                                <div class="xinwen-pernews-item-news"><a class="xinwen-pernews-item-link" target="_blank" href="http://tj.people.com.cn/n2/2018/0823/c375366-31968703.html"><img class="xinwen-pernews-item-img" :src="sit+article.thumb" alt=""></a><div class="xinwen-pernews-item-detail detail-type-img"><a class="xinwen-pernews-item-title" target="_blank" href="http://tj.people.com.cn/n2/2018/0823/c375366-31968703.html" title="article.title">{{article.title}}</a>
+                                <div class="xinwen-pernews-item-news"><a class="xinwen-pernews-item-link" target="_blank" href="http://tj.people.com.cn/n2/2018/0823/c375366-31968703.html"><img class="xinwen-pernews-item-img" :src="'http://'+article.thumb" alt=""></a><div class="xinwen-pernews-item-detail detail-type-img"><router-link :to="{ name: 'article', params: { id: article.id }}" class="xinwen-pernews-item-title">{{article.title}}</router-link>
                                     <!-- <p class="xinwen-pernews-item-info"><span class="xinwen-pernews-item-read">0</span><span class="xinwen-pernews-item-up">0</span><span class="xinwen-pernews-item-down">0</span></p> -->
                                 </div></div>
                             </li>
@@ -193,18 +191,16 @@
                     <div class="ibx-odd" id="zz">
                         <div id="ibx-mod-koubei" class="ibx-inner ibx-mod-koubei">
                           <div class="ibx-inner-title">
-                          <a data-click="{&quot;act&quot;: &quot;card_koubei_link&quot;}" target="_blank" href="http://koubei.baidu.com/" class="ibx-inner-title-ctx">醍醐灌顶</a>
+                          <a data-click="{&quot;act&quot;: &quot;card_koubei_link&quot;}" target="_blank" href="http://koubei.baidu.com/" class="ibx-inner-title-ctx">个人文章</a>
                           <ul class="ibx-inner-title-tab">
                             <li ref="ho" data-click="{&quot;act&quot;: &quot;card_koubei_mine&quot;}" class="ibx-inner-title-tabitem ibx-koubei-mine OP_LOG_TITLE" v-bind:class="{'current':is_th ==1}" @click="changetab('think', 9, {key:'is_th',value:1})">我的工作</li>
                             <li ref="think" class="ibx-inner-title-tabitem ibx-koubei-turth OP_LOG_TITLE" v-bind:class="{'current':is_th ==2}" @click="changetab('think', 10, {key:'is_th',value:2})">我的生活</li>
-                            <li data-click="{&quot;act&quot;: &quot;card_koubei_hot&quot;}" class="ibx-inner-title-tabitem ibx-koubei-hot OP_LOG_TITLE"  v-bind:class="{'current':is_th ==3}" @click="changetab('think', 11, {key:'is_th',value:3})">我的感悟</li>
+                            <li data-click="{&quot;act&quot;: &quot;card_koubei_hot&quot;}" class="ibx-inner-title-tabitem ibx-koubei-hot OP_LOG_TITLE"  v-bind:class="{'current':is_th ==3}" @click="changetab('think', 11, {key:'is_th',value:3})">我的随笔</li>
                           </ul>
                             <div class="koubei-title-link-container OP_LOG_TITLE">
-                            <!-- <a href="http://koubei.baidu.com/truth/wall?fr=ibaidu" class="OP_LOG_TITLE enter-koubei-link koubei-wall-link" data-click="{&quot;act&quot;: &quot;card_open_koubei_wall&quot;}" target="_blank" style="display: none;">进入真相墙 &gt;</a> -->
-                           <!--  <a href="http://koubei.baidu.com/home?fr=ibaidu" class="OP_LOG_TITLE enter-koubei-link koubei-home-link" data-click="{&quot;act&quot;: &quot;card_open_koubei_home&quot;}" target="_blank" style="display: inline;">进入我的口碑 &gt;</a> -->
                             </div></div><div class="ibx-inner-content" id="ibx-koubei"><div id="koubei-mine-container" class="koubei-mine-container "><div class="koubei-mine-top"><div class="ibx-card-pager"><span class="ibx-card-pager-prev"></span><span class="ibx-card-pager-item current" data-page="0"></span><span class="ibx-card-pager-item" data-page="1"></span><span class="ibx-card-pager-item" data-page="2"></span><span class="ibx-card-pager-next"></span></div></div><div id="koubei-mine-list">
                             <ul class="koubei-mine-list"  >
-                            <li class="koubei-mine-item" v-for="(value) in think"><div class="koubei-mine-item-container"><p class="koubei-mine-item-title"><a class="OP_LOG_TITLE" target="_blank" :title="value.title" :href="value.url" data-click="{&quot;act&quot;: &quot;card_koubei_item_message&quot;}" v-html="value.tag"></a></p><span class="koubei-mine-item-time">{{value.date}}</span></div></li>
+                            <li class="koubei-mine-item" v-for="(value) in think"><div class="koubei-mine-item-container"><p class="koubei-mine-item-title"><a class="OP_LOG_TITLE" target="_blank" :title="value.title"  data-click="{&quot;act&quot;: &quot;card_koubei_item_message&quot;}"> <router-link :to="{ name: 'article', params: { id: value.id }}">{{value.title}}</router-link></a></p><span class="koubei-mine-item-time">{{value.date}}</span></div></li>
                             </ul>
                             </div></div></div></div>
                     </div>
@@ -214,7 +210,7 @@
                         <router-link to="/add">
                         <div class="ibx-inner editCard-inner">
                             <div class="editCard-inner-add"></div>
-                            <div class="editCard-inner-tip"><i ></i><p>添加卡片</p></div>
+                            <div class="editCard-inner-tip"><i ></i><p>添加文章</p></div>
                         </div>
                         </router-link>
                         </div>
@@ -223,8 +219,13 @@
                 </div>
             </div>
 </template>
+<style>
+    @import "main.css";
+</style>
 <script>
 import { getCookieStorage, removeCookieStorage } from '@/utils/cookieStorage'
+import { getsessionStorage } from '@/utils/sessionStorage'
+
 export default {
   name: 'home',
   data () {
@@ -248,6 +249,7 @@ export default {
     } else {
       this.sit = process.env.BASE_API
     }
+    this.id = this.$route.query.id
   },
   mounted () {
     this.username = getCookieStorage('username')
@@ -288,6 +290,3 @@ export default {
   }
 }
 </script>
-<style>
-    @import "main.css"
-</style>

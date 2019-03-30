@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie'
 export function getCookieStorage (key) {
-	console.log(111)
   return Cookies.get(key)
 }
 

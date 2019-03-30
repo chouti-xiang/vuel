@@ -1,18 +1,17 @@
-import { requestArticle , responseArticle } from '@/api/home'
+import { request } from '@/api/request'
 const add = {
   state: {
-    data1:''
+    categray: ''
   },
   mutations: {
-    GET_ARTICLE:(state, data) => {
-      state.data1 = data
+    GET_CATEGRAY: (state, data) => {
+      state.categray = data
     }
   },
   actions: {
     addArticle ({commit}, data) {
       return new Promise((resolve, reject) => {
-        requestArticle(data).then(res => {
-
+        request(data).then(res => {
           resolve()
         })
           .catch(
@@ -21,16 +20,16 @@ const add = {
             })
       })  
     },
-    getArticle ({commit}, data) {
+    getCategray ({commit}, data) {
       return new Promise((resolve, reject) => {
-        responseArticle(data).then(res => {
-          commit('GET_ARTICLE',res.data.data[0])
+        request(data).then(res => {
+          commit('GET_CATEGRAY', res.data.data)
           resolve()
         })
-        .catch(
-           error => {
-            reject(error)
-           }
+          .catch(
+            error => {
+              reject(error)
+            }
           )
       })
     }

@@ -1,5 +1,5 @@
 import { setsessionStorage } from '@/utils/sessionStorage'
-import { request } from '@/api/home'
+import { request } from '@/api/request'
 const home = {
   state: {
     pid: '',
@@ -20,7 +20,7 @@ const home = {
           resolve()
         })
           .catch(error => {
-            reject('错误:' + error)
+            reject(error)
           })
       }) 
     }

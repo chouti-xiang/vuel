@@ -1,5 +1,5 @@
 import { setCookieStorage } from '@/utils/cookieStorage'
-import { requestUser } from '@/api/home'
+import { request } from '@/api/request'
 const login = {
   state: {
     users: ''
@@ -12,10 +12,12 @@ const login = {
   actions: {
     loginUser ({commit}, data) {
       return new Promise((resolve, reject) => {
-        requestUser(data).then(res => {
+        request(data).then(res => {
           commit('GET_USERS', res)
-          setCookieStorage('username', data.name)
-          resolve()
+          if (res.data.flag) {
+            setCookieStorage('username', data.name)
+          }
+          resolve(res)
         })
           .catch(
             error => {
