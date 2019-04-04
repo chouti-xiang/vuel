@@ -12,7 +12,7 @@ const add = {
     addArticle ({commit}, data) {
       return new Promise((resolve, reject) => {
         request(data).then(res => {
-          resolve()
+          resolve(res)
         })
           .catch(
             error => {

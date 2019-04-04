@@ -217,6 +217,15 @@ export default {
     onSubmit () {
       const url = this.sit + '/index.php?app=web&act=index-pullArticle'
       this.$store.dispatch('addArticle', {url: url, content: this.form}).then((res) => {
+        if (res.data.flag) {
+          this.$alert(res.data.data, '消息提示', {
+            confirmButtonText: '确定'
+          })
+        } else {
+          this.$alert(res.data.data, '错误原因', {
+            confirmButtonText: '确定'
+          })
+        }
       }).catch((error) => {
         console.log(error)
       })

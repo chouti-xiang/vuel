@@ -1395,9 +1395,9 @@ a.ibx-cal-dical-timetype:hover{text-decoration:underline}
 .ibx-hai-title.ibx-hai-life{background-position:2px -159px}
 .ibx-hai-title.ibx-hai-fun{background-position:2px -239px}
 .ibx-hai-title.ibx-hai-v{background-position:3px -319px}
-.ibx-hai-link{display:block;white-space:nowrap;line-height:24px}
+.ibx-hai-link{display:block;white-space:nowrap;line-height:24px;margin-right:10px;}
 .ibx-hai-link a{color:#4b4b4b;cursor:pointer;font-size:14px;text-decoration:none}
-.ibx-hai-link a:hover{text-decoration:underline}
+.ibx-hai-link a:hover{text-decoration:none;color: #1796f9;}
 .ibx-hai-space{margin-left:33%;border-left:1px solid #CDCFD1;width:0;height:48px}
 .noneC{
 	display: none;
