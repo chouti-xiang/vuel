@@ -1,5 +1,23 @@
 <template lang="html">
-<div>
+<div class="bg">
+  <header>
+    <div rel="scroll" id="scroll">
+      <div class="use">
+        <div class="e">
+          <el-switch
+            v-model="is_edit"
+            active-color="#13ce66"
+            inactive-color="#dcdfe6"
+            active-text="编辑模式"
+            inactive-text="预览模式">
+          </el-switch>
+        </div>
+        <div class="e">
+          <el-button type="primary" @click="onSubmit">保存<i class="el-icon-upload el-icon--right"></i></el-button>
+        </div>
+      </div>
+    </div>
+  </header>
 <div class="book-summary">
       
 <nav role="navigation">
@@ -7,212 +25,170 @@
 <ul class="summary">
     
         <li class="chapter active open" data-level="1.1.1" data-path="." data-name="基础">
-                <a href="javascript:;">基础</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.1.1" data-path="." data-name="快速上手">
-                <a href="https://developers.weixin.qq.com/minigame/dev/">快速上手</a>
+                <a href="javascript:;">私人笔记 <i class="el-icon-plus" ref="zz" @click="add" v-if="is_edit"></i></a>
+                <ul class="articles" ref="UL">
+          <li class="chapter" v-for="(value,index) in listkey.key">
+                <a href="javascript:;" @click="rightedit($event)" :data-key="index">{{value.title}}<i class="el-icon-tickets"  @click="rename($event)" :data-title="value.title" :data-key="index" v-if="is_edit"></i><i class="el-icon-circle-close" @click="del($event)" :data-title="value.title" :data-key="index" v-if="is_edit"></i></a>
                 
             </li>
-<li class="chapter" data-level="1.1.1.2" data-path="./tutorial/base/adapter.html" data-name="Adapter">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/base/adapter.html">Adapter</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.1.3" data-path="./tutorial/base/engine.html" data-name="对引擎的支持">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/base/engine.html">对引擎的支持</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.1.4" data-path="./tutorial/base/module.html" data-name="模块化">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/base/module.html">模块化</a>
-                
-            </li></ul>
-            </li>
-<li class="chapter" data-level="1.1.2" data-path="./framework/structure.html" data-name="目录结构">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/structure.html">目录结构</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.3" data-path="./framework/config.html" data-name="配置">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/config.html">配置</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.4" data-path="./framework/scene.html" data-name="场景值">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/scene.html">场景值</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.5" data-path="./framework/app-service/api.html" data-name="API">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/app-service/api.html">API</a>
-                
-            </li>
-<li class="chapter close" data-level="1.1.6" data-path="./tutorial/ability/network.html" data-name="基础能力">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/ability/network.html">基础能力</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.6.1" data-path="./tutorial/ability/network.html" data-name="网络">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/ability/network.html">网络</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.6.2" data-path="./tutorial/ability/storage.html" data-name="存储">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/ability/storage.html">存储</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.6.3" data-path="./tutorial/ability/file-system.html" data-name="文件系统">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/ability/file-system.html">文件系统</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.6.4" data-path="./tutorial/base/subpackages.html" data-name="分包加载">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/base/subpackages.html">分包加载</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.6.5" data-path="./tutorial/usability/worker.html" data-name="多线程 Worker">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/usability/worker.html">多线程 Worker</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.6.6" data-path="./tutorial/ability/audio.html" data-name="音频播放">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/ability/audio.html">音频播放</a>
-                
-            </li></ul>
-            </li>
-<li class="chapter close" data-level="1.1.7" data-path="./framework/server-ability/backend-api.html" data-name="后端能力">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/server-ability/backend-api.html">后端能力</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.7.1" data-path="./framework/server-ability/backend-api.html" data-name="后端API">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/server-ability/backend-api.html">后端API</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.7.2" data-path="./framework/server-ability/message-push.html" data-name="消息推送">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/server-ability/message-push.html">消息推送</a>
-                
-            </li></ul>
-            </li>
-<li class="chapter open" data-level="1.1.8" data-path="./tutorial/usability/debug.html" data-name="可用性">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/usability/debug.html">可用性</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.8.1" data-path="./tutorial/usability/debug.html" data-name="调试">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/usability/debug.html">调试</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.8.2" data-path="./tutorial/usability/performance.html" data-name="性能">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/usability/performance.html">性能</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.8.3" data-path="./tutorial/usability/operating-mechanism.html" data-name="运行机制">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/usability/operating-mechanism.html">运行机制</a>
-                
-            </li></ul>
-            </li>
-<li class="chapter close" data-level="1.1.9" data-path="./tutorial/open-ability/authorize.html" data-name="开放能力">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/authorize.html">开放能力</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.9.1" data-path="./tutorial/open-ability/login.html" data-name="登录">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/login.html">登录</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.2" data-path="./tutorial/open-ability/union-id.html" data-name="UnionID 机制说明">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/union-id.html">UnionID 机制说明</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.3" data-path="./tutorial/open-ability/signature.html" data-name="开放数据校验与解密">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/signature.html">开放数据校验与解密</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.4" data-path="./tutorial/open-ability/session-signature.html" data-name="用户登录态签名">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/session-signature.html">用户登录态签名</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.5" data-path="./tutorial/open-ability/authorize.html" data-name="用户授权">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/authorize.html">用户授权</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.6" data-path="./tutorial/open-ability/game-club.html" data-name="游戏圈使用指南">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/game-club.html">游戏圈使用指南</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.7" data-path="./tutorial/open-ability/midas-signature.html" data-name="米大师支付签名">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/midas-signature.html">米大师支付签名</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.8" data-path="./tutorial/open-ability/open-data.html" data-name="关系链数据使用指南">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/open-data.html">关系链数据使用指南</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.9" data-path="./tutorial/open-ability/payment.html" data-name="虚拟支付">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/payment.html">虚拟支付</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.10" data-path="./tutorial/open-ability/qr-code.html" data-name="获取二维码">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/qr-code.html">获取二维码</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.11" data-path="./tutorial/open-ability/ranklist.html" data-name="排行榜配置指引">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/ranklist.html">排行榜配置指引</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.12" data-path="./tutorial/open-ability/share/share.html" data-name="转发">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/share/share.html">转发</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.9.12.1" data-path="./tutorial/open-ability/share/share.html" data-name="转发">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/share/share.html">转发</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.12.2" data-path="./tutorial/open-ability/share/updatable-message.html" data-name="动态消息">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/share/updatable-message.html">动态消息</a>
-                
-            </li></ul>
-            </li>
-<li class="chapter" data-level="1.1.9.13" data-path="./tutorial/ad/banner-ad.html" data-name="广告">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/ad/banner-ad.html">广告</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.9.13.1" data-path="./tutorial/ad/banner-ad.html" data-name="Banner 广告">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/ad/banner-ad.html">Banner 广告</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.9.13.2" data-path="./tutorial/ad/rewarded-video-ad.html" data-name="激励视频广告">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/ad/rewarded-video-ad.html">激励视频广告</a>
-                
-            </li></ul>
-            </li></ul>
-            </li>
-<li class="chapter open" data-level="1.1.10" data-path="./framework/client-lib/" data-name="基础库">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/client-lib/">基础库</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.10.1" data-path="./framework/client-lib/version.html" data-name="版本分布">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/client-lib/version.html">版本分布</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.10.2" data-path="./framework/client-lib/client.html" data-name="与客户端版本对应关系">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/client-lib/client.html">与客户端版本对应关系</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.10.3" data-path="./framework/compatibility.html" data-name="低版本兼容">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/compatibility.html">低版本兼容</a>
-                
-            </li>
-<li class="chapter" data-level="1.1.10.4" data-name="更新日志">
-                <a target="_blank" href="https://developers.weixin.qq.com/miniprogram/dev/framework/release.html?t=19032120">更新日志</a>
-                
-            </li></ul>
+</ul>
             </li>
 
-    <li class="divider"></li>
+    <li class="divider" v-bind:class="{'hidden': flag}" v-if="is_edit"><div><input type="text" ref="rename"  value="" data-sec='222'  /><button v-on:click="save">保存</button></div></li>
 </ul>
 
         </nav>
     </div>
-
+<div class="right" ref="right">
+  <div class="work">
+    <Wysiwyg-Editor @input="geteditor" v-bind:value="pushcontent" :height="height" v-if="is_edit"  />
+    <div v-html="pushcontent" v-if="!is_edit"></div>
+  </div>
 </div>
+</div>
+
 </template>
 <style>
 @import "style.css";
+.bg{margin:0 auto;width:1140px;}
+header{
+  height: 50px;
+  margin-bottom: 15px;
+    }
+#scroll{
+  position: fixed;
+    width: 100%;
+    height:50px;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    min-width: 700px;
+    -webkit-box-shadow: 0 0 5px #888;
+    box-shadow: 0 0 5px #888;
+}
+.hidden{display:none}
+.right{
+   background-color: #fff;
+    padding: 10px;
+    float: right;
+    margin-right: 115px;
+    width: 60%;
+    margin-top: -15px;
+    }
+.use{
+      position: absolute;
+    right: 500px;
+    line-height: 40px;
+}
+.e{
+  margin-right:30px;
+  float:left;
+}
+code{
+    line-height: 1.8;
+    font-family: Menlo,Monaco,Consolas,Courier,monospace;
+    font-size: 12px;
+    padding: 18px 24px;
+    background-color: #fafafa;
+    border: 1px solid #eaeefb;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    -webkit-font-smoothing: auto;
+        display: block;
+}
+p code{
+  color: #c1788b;
+    padding: 4px 4px 2px 0;
+    letter-spacing: -0.3px;
+}
+
 </style>
 
 <script>
-
+import WysiwygEditor from '@/components/WysiwygEditor'
+import { getCookieStorage } from '@/utils/cookieStorage'
+let username = ''
 export default {
   name: 'login',
+  components: {WysiwygEditor},
   data () {
     return {
-      
+      sit: '',
+      flag: 1,
+      active: 0,
+      show: 0,
+      is_edit: false,
+      pushcontent: '',
+      height: '800px',
+      listkey: {
+        'key': [
+          {
+            'title': '添加新索引'
+          },
+          {
+            'title': '添加新索引'
+          },
+          {
+            'title': '添加新索引'
+          }
+        ],
+        'value': [
+          {
+            'content': '增加新内容1'
+          },
+          {
+            'content': '增加新内容2'
+          },
+          {
+            'content': '增加新内容3'
+          }
+        ]
+      }
+    }
+  },
+  beforeCreate: function () {
+    username = getCookieStorage('username')
+    if (!username) {
+      this.$alert('没有登录', '错误原因', {
+        confirmButtonText: '确定',
+        callback: action => {
+          location = '#/login'
+        }
+      })
     }
   },
   mounted () {
-  console.log($('.summary').html())
+    if (process.env.BASE_API === 'undefined') {
+      this.sit = ''
+    } else {
+      this.sit = process.env.BASE_API
+    }
+    const url = this.sit + '/index.php?app=web&act=index-getstylebook'
+    this.$store.dispatch('getstylebook', {url: url, ssid: username}).then((res) => {
+      if (this.$store.getters.stylebook !== '操作失败') {
+        this.listkey = this.$store.getters.stylebook
+        this.$refs.UL.childNodes[0].setAttribute('class', 'active')
+        this.pushcontent = this.listkey.value[0].content
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
   },
   methods: {
     onSubmit () {
-      const url = this.sit + '/index.php?app=web&act=index-check'
-      this.$store.dispatch('loginUser', {url: url, name: this.form.name, password: this.form.password}).then((res) => {
+      const url = this.sit + '/index.php?app=web&act=index-stylebook'
+      if (!this.listkey.key.length) { 
+        this.$alert('不能提交空数据', '错误原因', {
+          confirmButtonText: '确定'
+        })
+        return false 
+      }
+      this.$store.dispatch('pushstylebook', {url: url, ssid: username, scontent: this.listkey}).then((res) => {
         if (res.data.flag) {
-          this.$router.push('/')
+          this.$alert(res.data.data, '消息提示', {
+            confirmButtonText: '确定'
+          })
         } else {
           this.$alert(res.data.data, '错误原因', {
             confirmButtonText: '确定'
@@ -221,8 +197,55 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
+    },
+    geteditor (data) {
+      this.active ? this.active = this.active : this.active = 0
+      this.pushcontent = this.listkey.value[this.active].content = data
+    },
+    rightedit (element) {
+      let _self = element.target
+      let _index = _self.getAttribute('data-key')
+      // 向编辑器推送内容
+      this.pushcontent = this.listkey.value[_index].content
+      // this.this.listkey.value[_index].content
+      // 向数据模型中存编辑器里的内容
+      this.getactive(_index)
+    },
+    getactive (index) {
+      this.active = index 
+      for (let i in this.$refs.UL.childNodes) {
+        if (i !== index && i.length === 1) {
+          this.$refs.UL.childNodes[i].setAttribute('class', '')
+        } else {
+          this.$refs.UL.childNodes[index].setAttribute('class', 'active')
+        }
+      }
+    },
+    add () {
+      this.listkey.key.push({'title': '添加新索引'})
+      this.listkey.value.push({'content': '增加新内容'})
+    },
+    rename (element) {
+      let _self = element.target
+      let _text = _self.getAttribute('data-title')
+      let _index = _self.getAttribute('data-key')
+      this.$refs.rename.value = _text
+      this.$refs.rename.dataset.sec = _index
+      this.flag = 0
+    },
+    del (element) {
+      let _self = element.target
+      let _index = _self.getAttribute('data-key')
+      this.listkey.value.splice(_index, 1)
+      this.listkey.key.splice(_index, 1)
+    },
+    save () {
+      let _value = this.$refs.rename.value
+      let _key = this.$refs.rename.dataset.sec
+      this.listkey.key[_key].title = _value
+      this.flag = 1
     }
+
   }
-  
 }
 </script>

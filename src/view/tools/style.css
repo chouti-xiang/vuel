@@ -6,7 +6,7 @@
 }
 .book-summary {
     font-family: -apple-system-font,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei UI","Microsoft YaHei",Arial,sans-serif;
-    position: absolute;
+    position: fixed;
     top: 45px;
     /* left: -320px; */
     bottom: 0;
@@ -43,6 +43,7 @@
     color: #1aad16;
     background: 0 0;
     text-decoration: none;
+    outline:none;  
 }
 .book-summary ul.summary li a {
     text-overflow: initial;
@@ -57,6 +58,7 @@
     overflow: hidden;
     white-space: normal;
     position: relative;
+    text-decoration: none;
 }
 .summary>.chapter>a {
     font-size: 16px;
@@ -78,4 +80,10 @@
 }
 .book-summary ul.summary li {
     list-style: none;
+}
+
+p{
+    font-size: 14px;
+    color: #5e6d82;
+    line-height: 1.5em;
 }

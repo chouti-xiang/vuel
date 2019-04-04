@@ -160,11 +160,7 @@
 </style>
 <script>
 import WysiwygEditor from '@/components/WysiwygEditor'
-import { getCookieStorage, removeCookieStorage } from '@/utils/cookieStorage'
-let username = getCookieStorage('username')
-if (!username) {
-  location = '/'
-}
+import { getCookieStorage } from '@/utils/cookieStorage'
 export default {
   name: 'add',
   components: {WysiwygEditor},
@@ -188,15 +184,15 @@ export default {
     }
   },
   beforeCreate: function () {
-    // let username = getCookieStorage('username')
-    // if (!username) {
-    //   this.$alert('没有登录', '错误原因', {
-    //     confirmButtonText: '确定',
-    //     callback: action => {
-    //       location = '/'
-    //     }
-    //   })
-    // }
+    let username = getCookieStorage('username')
+    if (!username) {
+      this.$alert('没有登录', '错误原因', {
+        confirmButtonText: '确定',
+        callback: action => {
+          location = '#/login'
+        }
+      })
+    }
   },
   computed: {
     s: function () {

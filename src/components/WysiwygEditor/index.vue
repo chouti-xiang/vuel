@@ -30,6 +30,13 @@ export default {
       editor: ''
     }
   },
+  watch: {
+    value (newValue, preValue) {
+      if (newValue !== preValue && newValue !== this.editor.getHtml()) {
+        this.editor.setHtml(newValue)
+      }
+    }
+  },
   computed: {
     editorOptions () {
       const options = Object.assign({}, editorDefaultOptions)
@@ -44,6 +51,10 @@ export default {
       el: document.getElementById(this.id)
     })
     this.editor = new Editor(options)
+    
+    if (this.value) {
+      this.editor.setHtml(this.value)
+    }
 
     this.editor.on('change', () => {
       this.$emit('input', this.editor.getHtml())

@@ -15,6 +15,7 @@ const login = {
         request(data).then(res => {
           commit('GET_USERS', res)
           if (res.data.flag) {
+            console.log(1111)
             setCookieStorage('username', data.name)
           }
           resolve(res)

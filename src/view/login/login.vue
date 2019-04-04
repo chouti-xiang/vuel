@@ -25,6 +25,7 @@
 </div>
 </template>
 <script>
+import { getCookieStorage } from '@/utils/cookieStorage'
 export default {
   name: 'login',
   data () {
