@@ -99,7 +99,7 @@ code{
 }
 p code{
   color: #c1788b;
-    padding: 4px 4px 2px 0;
+    padding: 4px 4px 2px 5px;
     letter-spacing: -0.3px;
 }
 
