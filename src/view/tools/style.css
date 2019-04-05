@@ -6,7 +6,7 @@
 }
 .book-summary {
     font-family: -apple-system-font,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei UI","Microsoft YaHei",Arial,sans-serif;
-    position: absolute;
+    position: fixed;
     top: 45px;
     /* left: -320px; */
     bottom: 0;
@@ -22,21 +22,6 @@
     -o-transition: left 250ms ease;
     transition: left 250ms ease;
 }
-
-/*滚动条索道*/
-.book-summary::-webkit-scrollbar{
-        width: 6px;
-    height: 6px;
-}
-.book-summary::-webkit-scrollbar-thumb{
-    background-color: #c2c2c2;
-    background-clip: padding-box;
-    min-height: 28px;
-}
-.book-summary::-webkit-scrollbar-track {
-       background-color: #FFF;
-}
-/*滚动条索道完毕*/
 .book-summary ul.summary {
     list-style: none;
     margin: 0;
@@ -58,11 +43,7 @@
     color: #1aad16;
     background: 0 0;
     text-decoration: none;
-}
-.book-summary ul.summary li>a >i{
-    font-size: 12px;
-    margin-right: 3px;
-
+    outline:none;  
 }
 .book-summary ul.summary li a {
     text-overflow: initial;
@@ -83,7 +64,7 @@
     font-size: 16px;
 }
 .summary>.chapter>a {
-    padding-left: 5px!important;
+    padding-left: 29px!important;
 }
 .summary>.chapter.open>ul {
     display: block;
@@ -94,118 +75,15 @@
 .summary>.chapter>.articles {
     margin-left: 10px;
 }
-.articles a {
-    font-size: 14px;
-}
 .book-summary ul.summary li ul {
     padding-left: 20px;
 }
 .book-summary ul.summary li {
     list-style: none;
 }
-.sub_nav_box {
-    position: relative;
-    background-color: #fff;
-    font-size: 16px;
-    height: 45px;
-    z-index: 9;
-    padding-left: 350px;
-    background-color: #f6f8f9;
-}
 
-/*新增*/
-body{
-    overflow-y: hidden;
-}
-.right{
-    width: 73.5%;
-    height: 100%;
-    position: absolute;
-    left: 355px;
-    top: 100px;
-    overflow-y: auto;
-}
-/*滚动条索道*/
-.right::-webkit-scrollbar{
-        width: 6px;
-    height: 2px;
-}
-.right::-webkit-scrollbar-thumb{
-    background-color: #c2c2c2;
-    background-clip: padding-box;
-    min-height: 28px;
-}
-.right::-webkit-scrollbar-track {
-       background-color: #FFF;
-}
-/*滚动条索道完毕*/
-header {
-    height: 30px;
-    margin-bottom: 15px;
-    font-family: 'Microsoft YaHei',Arial,"\5B8B\4F53",Helvetica,sans-serif;
-}
-header .header-stackup {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background: #fff;
-    z-index: 100;
-    min-width: 700px;
-    -webkit-box-shadow: 0 0 5px #888;
-    box-shadow: 0 0 5px #888;
-}
-.ibx-container {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-.row {
-    padding-bottom: 0;
-}
-.header-logo-index {
-    width: 180px;
-}
-.header-tool-allmod, .header-tool-cal, .header-tool-config, .header-tool-news, .header-tool-ps, .header-tool-user {
-    position: relative;
-    cursor: pointer;
-    font-size: 12px;
-    height: 50px;
-    text-decoration: underline;
-    line-height: 50px;
-}
-.header-tool, .header-tool-search {
-    float: right;
-    margin-right: 10px;
-}
-.header-tu-img {
-    width: 24px;
-    height: 24px;
-    position: relative;
-    z-index: 5;
-    margin-top: 2px;
-    margin-left: 2px;
-    color: #333;
-}
-.header-tool-user .header-tc-content {
-    width: 130px;
-    right: -59px;
-    text-align: center;
-    display: block;
-}
-.header-tc-content {
-    position: absolute;
-    border: 1px solid #ccc;
-    right: -30px;
-    top: 50px;
-    background-color: #FFF;
-    text-align: left;
-    display: none;
-    z-index: 2;
-    color: #4b4b4b;
-    font-size: 12px;
-    height: auto!important;
-    min-height: 32px;
-    height: 32px;
-    -webkit-box-shadow: 0 2px 5px #ccc;
-    box-shadow: 0 2px 5px #ccc;
+p{
+    font-size: 14px;
+    color: #5e6d82;
+    line-height: 1.5em;
 }

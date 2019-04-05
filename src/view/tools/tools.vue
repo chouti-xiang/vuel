@@ -1,123 +1,194 @@
 <template lang="html">
-<div class="body">
- <el-alert
-    title="这是一个抽屉箱，我们可以自行的添加stylebook，也可以自由管理stylebook"
-    type="success"
-   >
-  </el-alert>
-  <div style="text-align:right;">
-     <router-link to="/stylebook"><el-button type="primary" icon="el-icon-edit"></el-button></router-link>
-    <el-button type="primary" icon="el-icon-search">搜索</el-button>
-  </div>
+<div class="bg">
+  <header>
+    <div rel="scroll" id="scroll">
+      <div class="use">
+        <div class="e">
+          <el-switch
+            v-model="is_edit"
+            active-color="#13ce66"
+            inactive-color="#dcdfe6"
+            active-text="编辑模式"
+            inactive-text="预览模式">
+          </el-switch>
+        </div>
+        <div class="e">
+          <el-button type="primary" @click="onSubmit">保存<i class="el-icon-upload el-icon--right"></i></el-button>
+        </div>
+      </div>
+    </div>
+  </header>
 <div class="book-summary">
       
 <nav role="navigation">
             
 <ul class="summary">
     
-        <li class="chapter active open" data-level="1.1.1" data-path="." data-name="linux">
-           
-                <a href="javascript:;"> <i class="el-icon-arrow-down"></i>linux</a>
-                <ul class="articles">
-                    <li class="chapter" data-level="1.1.1.1" data-path="." data-name="安装">
-                        <a href="https://developers.weixin.qq.com/minigame/dev/">安装</a>
-                    </li>
-                </ul>
-            </li>
-        <li class="chapter" data-level="1.1.2" data-path="./framework/structure.html" data-name="nginx">
-                <a href="javascript:;"> <i class="el-icon-arrow-down"></i>nginx</a>
-            </li>
-        <li class="chapter" data-level="1.1.3" data-path="./framework/config.html" data-name="centos">
-                <a href="javascript:;"> <i class="el-icon-arrow-down"></i>centos</a>
-            </li>
-        <li class="chapter" data-level="1.1.4" data-path="./framework/scene.html" data-name="git">
-                <a href="javascript:;"> <i class="el-icon-arrow-down"></i>git</a>
-            </li>
-        <li class="chapter" data-level="1.1.5" data-path="./framework/app-service/api.html" data-name="php">
-                <a href="javascript:;"> <i class="el-icon-arrow-down"></i>php</a>
-            </li>
-        <li class="chapter close" data-level="1.1.6" data-path="./tutorial/ability/network.html" data-name="mysql">
-                <a href="javascript:;"> <i class="el-icon-arrow-down"></i>mysql</a>
-        <ul class="articles"><li class="chapter" data-level="1.1.6.1" data-path="./tutorial/ability/network.html" data-name="网络">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/ability/network.html">网络</a>
-                
-            </li>
-        </ul>
-            </li>
-<li class="chapter close" data-level="1.1.7" data-path="./framework/server-ability/backend-api.html" data-name="svn">
-                <a href="javascript:;"> <i class="el-icon-arrow-down"></i>svn</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.7.1" data-path="./framework/server-ability/backend-api.html" data-name="后端API">
-                <a href="https://developers.weixin.qq.com/minigame/dev/framework/server-ability/backend-api.html">后端API</a>
+        <li class="chapter active open" data-level="1.1.1" data-path="." data-name="基础">
+                <a href="javascript:;">私人笔记 <i class="el-icon-plus" ref="zz" @click="add" v-if="is_edit"></i></a>
+                <ul class="articles" ref="UL">
+          <li class="chapter" v-for="(value,index) in listkey.key">
+                <a href="javascript:;" @click="rightedit($event)" :data-key="index">{{value.title}}<i class="el-icon-tickets"  @click="rename($event)" :data-title="value.title" :data-key="index" v-if="is_edit"></i><i class="el-icon-circle-close" @click="del($event)" :data-title="value.title" :data-key="index" v-if="is_edit"></i></a>
                 
             </li>
 </ul>
-            </li>
-<li class="chapter open" data-level="1.1.8" data-path="./tutorial/usability/debug.html" data-name="vim">
-                <a href="javascript:;"> <i class="el-icon-arrow-down"></i>vim</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.8.1" data-path="./tutorial/usability/debug.html" data-name="调试">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/usability/debug.html">调试</a>
-                
-            </li>
-</ul>
-            </li>
-<li class="chapter close" data-level="1.1.9" data-path="./tutorial/open-ability/authorize.html" data-name="ftp">
-                <a href="javascript:;"> <i class="el-icon-arrow-down"></i>ftp</a>
-                <ul class="articles"><li class="chapter" data-level="1.1.9.1" data-path="./tutorial/open-ability/login.html" data-name="登录">
-                <a href="https://developers.weixin.qq.com/minigame/dev/tutorial/open-ability/login.html">登录</a>
-                
-            </li>
-</ul>
-            </li>
-</ul>
-            </li></ul>
             </li>
 
+    <li class="divider" v-bind:class="{'hidden': flag}" v-if="is_edit"><div><input type="text" ref="rename"  value="" data-sec='222'  /><button v-on:click="save">保存</button></div></li>
 </ul>
 
         </nav>
     </div>
-<div class="right" v-html="content.content">
+<div class="right" ref="right">
+  <div class="work">
+    <Wysiwyg-Editor @input="geteditor" v-bind:value="pushcontent" :height="height" v-if="is_edit"  />
+    <div v-html="pushcontent" v-if="!is_edit"></div>
+  </div>
+</div>
+</div>
 
-</div>
-</div>
 </template>
 <style>
 @import "style.css";
+.bg{margin:0 auto;width:1140px;}
+header{
+  height: 50px;
+  margin-bottom: 15px;
+    }
+#scroll{
+  position: fixed;
+    width: 100%;
+    height:50px;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    min-width: 700px;
+    -webkit-box-shadow: 0 0 5px #888;
+    box-shadow: 0 0 5px #888;
+}
+.hidden{display:none}
+.right{
+   background-color: #fff;
+    padding: 10px;
+    float: right;
+    margin-right: 115px;
+    width: 60%;
+    margin-top: -15px;
+    }
+.use{
+      position: absolute;
+    right: 500px;
+    line-height: 40px;
+}
+.e{
+  margin-right:30px;
+  float:left;
+}
+code{
+    line-height: 1.8;
+    font-family: Menlo,Monaco,Consolas,Courier,monospace;
+    font-size: 12px;
+    padding: 18px 24px;
+    background-color: #fafafa;
+    border: 1px solid #eaeefb;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    -webkit-font-smoothing: auto;
+        display: block;
+}
+p code{
+  color: #c1788b;
+    padding: 4px 4px 2px 5px;
+    letter-spacing: -0.3px;
+}
+
 </style>
 
 <script>
-
- 
+import WysiwygEditor from '@/components/WysiwygEditor'
+import { getCookieStorage } from '@/utils/cookieStorage'
+let username = ''
 export default {
   name: 'login',
+  components: {WysiwygEditor},
   data () {
     return {
-      content:''
+      sit: '',
+      flag: 1,
+      active: 0,
+      show: 0,
+      is_edit: false,
+      pushcontent: '',
+      height: '800px',
+      listkey: {
+        'key': [
+          {
+            'title': '添加新索引'
+          },
+          {
+            'title': '添加新索引'
+          },
+          {
+            'title': '添加新索引'
+          }
+        ],
+        'value': [
+          {
+            'content': '增加新内容1'
+          },
+          {
+            'content': '增加新内容2'
+          },
+          {
+            'content': '增加新内容3'
+          }
+        ]
+      }
+    }
+  },
+  beforeCreate: function () {
+    username = getCookieStorage('username')
+    if (!username) {
+      this.$alert('没有登录', '错误原因', {
+        confirmButtonText: '确定',
+        callback: action => {
+          location = '#/login'
+        }
+      })
     }
   },
   mounted () {
-  // console.log($('.summary').html())
     if (process.env.BASE_API === 'undefined') {
       this.sit = ''
     } else {
       this.sit = process.env.BASE_API
     }
-    const url = this.sit + '/index.php?app=web&act=index-getArticle'
-    this.$store.dispatch('getArticle', {url: url, id: 61}).then((res) => {
-      this.content = this.$store.getters.article
+    const url = this.sit + '/index.php?app=web&act=index-getstylebook'
+    this.$store.dispatch('getstylebook', {url: url, ssid: username}).then((res) => {
+      if (this.$store.getters.stylebook !== '操作失败') {
+        this.listkey = this.$store.getters.stylebook
+        this.$refs.UL.childNodes[0].setAttribute('class', 'active')
+        this.pushcontent = this.listkey.value[0].content
+      }
     }).catch((error) => {
       console.log(error)
-    })
-    $('.chapter').click(function(){
-        $(this).find('ul').toggle()
     })
   },
   methods: {
     onSubmit () {
-      const url = this.sit + '/index.php?app=web&act=index-check'
-      this.$store.dispatch('loginUser', {url: url, name: this.form.name, password: this.form.password}).then((res) => {
+      const url = this.sit + '/index.php?app=web&act=index-stylebook'
+      if (!this.listkey.key.length) { 
+        this.$alert('不能提交空数据', '错误原因', {
+          confirmButtonText: '确定'
+        })
+        return false 
+      }
+      this.$store.dispatch('pushstylebook', {url: url, ssid: username, scontent: this.listkey}).then((res) => {
         if (res.data.flag) {
-          this.$router.push('/')
+          this.$alert(res.data.data, '消息提示', {
+            confirmButtonText: '确定'
+          })
         } else {
           this.$alert(res.data.data, '错误原因', {
             confirmButtonText: '确定'
@@ -126,8 +197,55 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
+    },
+    geteditor (data) {
+      this.active ? this.active = this.active : this.active = 0
+      this.pushcontent = this.listkey.value[this.active].content = data
+    },
+    rightedit (element) {
+      let _self = element.target
+      let _index = _self.getAttribute('data-key')
+      // 向编辑器推送内容
+      this.pushcontent = this.listkey.value[_index].content
+      // this.this.listkey.value[_index].content
+      // 向数据模型中存编辑器里的内容
+      this.getactive(_index)
+    },
+    getactive (index) {
+      this.active = index 
+      for (let i in this.$refs.UL.childNodes) {
+        if (i !== index && i.length === 1) {
+          this.$refs.UL.childNodes[i].setAttribute('class', '')
+        } else {
+          this.$refs.UL.childNodes[index].setAttribute('class', 'active')
+        }
+      }
+    },
+    add () {
+      this.listkey.key.push({'title': '添加新索引'})
+      this.listkey.value.push({'content': '增加新内容'})
+    },
+    rename (element) {
+      let _self = element.target
+      let _text = _self.getAttribute('data-title')
+      let _index = _self.getAttribute('data-key')
+      this.$refs.rename.value = _text
+      this.$refs.rename.dataset.sec = _index
+      this.flag = 0
+    },
+    del (element) {
+      let _self = element.target
+      let _index = _self.getAttribute('data-key')
+      this.listkey.value.splice(_index, 1)
+      this.listkey.key.splice(_index, 1)
+    },
+    save () {
+      let _value = this.$refs.rename.value
+      let _key = this.$refs.rename.dataset.sec
+      this.listkey.key[_key].title = _value
+      this.flag = 1
     }
+
   }
-  
 }
 </script>

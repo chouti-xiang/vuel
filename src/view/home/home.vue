@@ -30,7 +30,7 @@
                     <div class="ibx-hai-title ibx-hai-tool">工具</div>
                 </li>
                 <li class="ibx-header-app-item clr">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN"><router-link to="/tools">搜索</router-link></a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN"><router-link to="/tools" target="_blank">stylebook</router-link></a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <div class="ibx-hai-space"></div>
@@ -39,8 +39,8 @@
                     <div class="ibx-hai-title ibx-hai-sns">外链</div>
                 </li>
                 <li class="ibx-header-app-item">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tieba&quot;}" target="_blank" href="http://tieba.baidu.com/home/main?un=mpshenqi&amp;fr=ibaidu&amp;ie=utf-8">百度</a></span>
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;baike&quot;}" target="_blank" href="http://baike.baidu.com/usercenter?fr=ibaidu">谷歌</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tieba&quot;}" target="_blank" href="https://baike.baidu.com/">百度百科</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;baike&quot;}" target="_blank" href="https://mp.weixin.qq.com/cgi-bin/loginpage?t=wxm2-login&lang=zh_CN">公众平台</a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;zhidao&quot;}" target="_blank" href="https://www.aliyun.com/">阿里云</a></span>
@@ -145,7 +145,7 @@
                         </div>
                         <div id="hot-video" class="my-video">
                             <ul class="ibx-video-list" style="width: 2868px; left: 0px;" id="hot-video1">
-                            <li class="ibx-video-item" v-for="(value, key) in video"><a target="_blank" :href="value.url"><img v-bind:src="sit+value.thumb" :alt="value.title" width="130"></a><div class="ibx-video-detail"><em class="ibx-video-dtitle-rank front ">{{key+1}}</em><a target="_blank" class="ibx-video-dtitle" :href="value.url" :title="value.title">{{value.title}}</a><label class="ibx-video-actor" :title="key">{{key}}</label><label class="ibx-video-tag" :title="value.type">{{value.type}}</label></div></li>
+                            <li class="ibx-video-item" v-for="(value, key) in video"><a target="_blank" :href="value.url"><img v-bind:src="'http://'+value.thumb" :alt="value.title" width="130"></a><div class="ibx-video-detail"><em class="ibx-video-dtitle-rank front ">{{key+1}}</em><a target="_blank" class="ibx-video-dtitle" :href="value.url" :title="value.title">{{value.title}}</a><label class="ibx-video-actor" :title="key">{{key}}</label><label class="ibx-video-tag" :title="value.type">{{value.type}}</label></div></li>
                             </ul>
                         </div>
                         <div class="ibx-video-mask"></div>
@@ -207,7 +207,7 @@
                 </div>
                                                 <div data-scroll-reveal="" class="col span_4_2 OP_LOG_LINK" data-click="{&quot;mod&quot;:&quot;card_mgr&quot;,&quot;act&quot;:&quot;msg_click&quot;}" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
                     <a href="#" style="display: block;" ><div class="ibx-even editCard" id="editCard">
-                        <router-link to="/add">
+                        <router-link to="/add" target="_blank">
                         <div class="ibx-inner editCard-inner">
                             <div class="editCard-inner-add"></div>
                             <div class="editCard-inner-tip"><i ></i><p>添加文章</p></div>
