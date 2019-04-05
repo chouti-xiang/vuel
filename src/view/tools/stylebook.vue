@@ -13,45 +13,16 @@
            <el-input 
   v-model="form.title"
   size="medium"
-  placeholder="请在这里输入标题"
+  placeholder="分类"
   clearable>
   </el-input>
           </div>
         <div>
-                    <el-input 
-  v-model="form.author"
-  size="small " 
-  placeholder="请输入作者"
-  clearable>
-  </el-input>
+                  
           </div>
         <Wysiwyg-Editor @input="geteditor"  />
-        <div class="tx-tj-qt">
-            <div class="tx-tj-qt-titile">封面和摘要</div>
-            <div>
-            <div class="tx-tj-thumb">
-                   <el-upload
-          class="avatar-uploader"
-          :action="url"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload">
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          </el-upload>
-              <span>选择封面</span>
-        </div>
-            <div class="tx-tj-description">
-              <el-input
-                type="textarea"
-                :rows="3"
-                :maxlength="54"
-                placeholder="选填，如果不填写会默认抓取正文前54个字"
-                v-model="form.description">
-             </el-input>
-              </div>
-            </div>
-        </div>
+        
+          
         <div class="tx-tj-category">
             <div class="tx-tj-qt-titile">分类名称</div>
             <div>
@@ -80,15 +51,6 @@
         </div>
         <div>
       
-          <el-form-item label="来源" style="margin-top:20px">
- <el-input 
-  v-model="form.url"
-  size="medium"
-  clearable
-  style="width:50%">
-  </el-input>
-</el-form-item>
-
         </div>
         <div style="text-align: center;"><el-button type="primary" @click="onSubmit">提交</el-button></div>
         </div>
@@ -167,7 +129,7 @@ if (!username) {
   location = '/'
 }
 export default {
-  name: 'add',
+  name: 'stylebook',
   components: {WysiwygEditor},
   data () {
     return {
@@ -189,20 +151,10 @@ export default {
     }
   },
   beforeCreate: function () {
-    // let username = getCookieStorage('username')
-    // if (!username) {
-    //   this.$alert('没有登录', '错误原因', {
-    //     confirmButtonText: '确定',
-    //     callback: action => {
-    //       location = '/'
-    //     }
-    //   })
-    // }
+ 
   },
   computed: {
-    s: function () {
-      return this.SelectValue1
-    }
+   
   },
   mounted () {
     if (process.env.BASE_API === 'undefined') {
@@ -210,7 +162,6 @@ export default {
     } else {
       this.sit = process.env.BASE_API
     }
-    this.url = this.sit + '/index.php?app=web&act=index-imgup'
     let SelectUrl = this.sit + '/index.php?app=web&act=index-getPID'
     this.$store.dispatch('getCategray', {url: SelectUrl, pid: 0}).then((res) => {
       this.options = this.$store.getters.categray
@@ -228,21 +179,6 @@ export default {
     },
     geteditor (data) {
       this.form.content = data
-    },
-    handleAvatarSuccess (res, file) {
-      this.form.thumb = res
-      this.imageUrl = URL.createObjectURL(file.raw)
-    },
-    beforeAvatarUpload (file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isJPG && isLt2M
     },
     getCategray () {
       this.form.columnId = null

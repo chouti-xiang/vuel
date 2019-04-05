@@ -57,7 +57,7 @@
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;licai&quot;}" target="_blank" href="https://www.cnblogs.com/hezihao/p/8072585.html">webpack</a></span>
                 </li>
                 <li class="ibx-header-app-item">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="http://www.nuomi.com/?cid=002544&amp;fr=ibaidu">财经</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="https://www.jb51.net/shouce/jquery1.82/">jquery</a></span>
                 </li>
             </ul>
         </section>

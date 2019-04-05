@@ -34,6 +34,11 @@ export default new Router({
       path: '/tools',
       name: 'tools',
       component: () => import('@/view/tools/tools')
+    },
+    {
+      path: '/stylebook',
+      name: 'stylebook',
+      component: () => import('@/view/tools/stylebook')
     }
   ]
 })
