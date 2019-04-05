@@ -96,6 +96,7 @@ code{
     border-radius: 4px;
     -webkit-font-smoothing: auto;
         display: block;
+        white-space: pre-wrap;
 }
 p code{
   color: #c1788b;
