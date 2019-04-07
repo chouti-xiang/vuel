@@ -185,7 +185,7 @@ export default {
     }
   },
   beforeCreate: function () {
-    let username = getCookieStorage('username')
+    const username = getCookieStorage('username')
     if (!username) {
       this.$alert('没有登录', '错误原因', {
         confirmButtonText: '确定',
@@ -217,6 +217,7 @@ export default {
   methods: {
     onSubmit () {
       const url = this.sit + '/index.php?app=web&act=index-pullArticle'
+      this.form.uuid = getCookieStorage('username')
       this.$store.dispatch('addArticle', {url: url, content: this.form}).then((res) => {
         if (res.data.flag) {
           this.$alert(res.data.data, '消息提示', {

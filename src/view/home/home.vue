@@ -44,7 +44,7 @@
                 </li>
                 <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;zhidao&quot;}" target="_blank" href="https://www.aliyun.com/">阿里云</a></span>
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;wenku&quot;}" target="_blank" href="http://www.jq22.com/">免费模版</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;wenku&quot;}" target="_blank" href="http://www.cssmoban.com">免费模版</a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <div class="ibx-hai-space"></div>
@@ -57,7 +57,7 @@
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;licai&quot;}" target="_blank" href="https://www.cnblogs.com/hezihao/p/8072585.html">webpack</a></span>
                 </li>
                 <li class="ibx-header-app-item">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="https://www.jb51.net/shouce/jquery1.82/">jquery</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="http://www.jq22.com/chm/jquery/index.html">jquery</a></span>
                 </li>
             </ul>
         </section>
@@ -70,7 +70,16 @@
                                 <div class="ibx-uc-uimg-mask">
                                     <a data-click="{&quot;act&quot;:&quot;uc_set&quot;}" class="ibx-uc-ulink" target="_blank" href="http://www.baidu.com/p/setting/profile/portrait">更换头像</a>
                                 </div>
-                                <img class="ibx-uc-img" src="@/assets/2.jpg" >                     
+                                <el-upload
+  class="avatar-uploader"
+  :action="thumbUrl"
+  :show-file-list="false"
+  :on-success="handleAvatarSuccess"
+  :before-upload="beforeAvatarUpload">
+  <img v-if="imageUrl" :src="imageUrl" class=" ibx-uc-img">
+  <img v-else class="ibx-uc-img" src="@/assets/2.jpg" >
+</el-upload>
+                                                     
                             </div>
                             <div class="ibx-uc-unick">
                                 <a data-click="{&quot;act&quot;:&quot;uc_name&quot;}" target="_blank" href="http://www.baidu.com/p/setting/profile/basic" class="ibx-uc-nick">{{name}}</a>                
@@ -240,7 +249,9 @@ export default {
       video: '',
       think: '',
       sit: '',
-      username: ''
+      username: '',
+      imageUrl: '',
+      thumbUrl:''
     }
   },
   created () {
@@ -251,34 +262,51 @@ export default {
     }
     this.id = this.$route.query.id
   },
+  watch: {
+    // value (newValue, preValue) {
+    //   if (newValue !== preValue && newValue !== this.editor.getHtml()) {
+    //     this.editor.setHtml(newValue)
+    //   }
+    // }
+  },
   mounted () {
+    this.thumbUrl = this.sit + '/index.php?app=web&act=index-imgup'
     this.username = getCookieStorage('username')
     this.url = this.sit + '/index.php?app=web&act=index-initDATAT'
-    this.$store.dispatch('get_qqtj', {url: this.url, pid: 7}).then(res => {
+    this.$store.dispatch('get_qqtj', {url: this.url, pid: 7, username: this.username}).then(res => {
       if (!this.$store.getters.homeitem) {
         this.item = JSON.parse(getsessionStorage('get_item'))
       } else {
         this.item = this.$store.getters.homeitem
       }  
     })
-    this.$store.dispatch('get_qqtj', {url: this.url, pid: 4}).then(res => {
+    this.$store.dispatch('get_qqtj', {url: this.url, pid: 4, username: this.username}).then(res => {
       if (!this.$store.getters.homeitem) {
         this.video = JSON.parse(getsessionStorage('get_video'))
       } else {
         this.video = this.$store.getters.homeitem
       }  
     })
-    this.$store.dispatch('get_qqtj', {url: this.url, pid: 9}).then(res => {
+    this.$store.dispatch('get_qqtj', {url: this.url, pid: 9, username: this.username}).then(res => {
       if (!this.$store.getters.homeitem) {
         this.think = JSON.parse(getsessionStorage('get_think'))
       } else {
         this.think = this.$store.getters.homeitem
       }  
     })
+    let getthumburl = this.sit + '/index.php?app=web&act=index-get_thumb'
+    this.$store.dispatch('getcontent', {url: getthumburl,uid: this.username}).then(res => {
+        console.log(this.$store.getters.contents)
+      if (!this.$store.getters.contents) {
+        // this.think = JSON.parse(getsessionStorage('get_think'))
+      } else {
+        this.imageUrl = 'http://'+this.$store.getters.contents.content
+      }  
+    })
   },
   methods: {
     changetab (parma, pid, obj) {
-      this.$store.dispatch('get_qqtj', {url: this.url, pid: pid}).then(res => {
+      this.$store.dispatch('get_qqtj', {url: this.url, pid: pid, username: this.username}).then(res => {
         this.$set(this, parma, this.$store.getters.homeitem)
         this.$set(this, obj.key, obj.value)
       })
@@ -286,7 +314,30 @@ export default {
     logout () {
       removeCookieStorage('username')
       this.username = ''
-    }
+    },
+     handleAvatarSuccess (res, file) {
+      // this.form.thumb = res
+      this.imageUrl = URL.createObjectURL(file.raw)
+      if(!this.username){
+        this.$message('不登录是无法保存的呦')
+      }else{
+        let upthumb = this.sit + '/index.php?app=web&act=index-up_thumb'
+        this.$store.dispatch('up_thumb', {url: upthumb, content: res, uid: this.username}).then(res => {
+        
+      })
+      }
+    },
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isJPG && isLt2M
+    },
   }
 }
 </script>

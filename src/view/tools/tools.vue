@@ -1,5 +1,5 @@
 <template lang="html">
-<div class="bg">
+<div class="bgg">
   <header>
     <div rel="scroll" id="scroll">
       <div class="use">
@@ -50,7 +50,7 @@
 </template>
 <style>
 @import "style.css";
-.bg{margin:0 auto;width:1140px;}
+.bgg{margin:0 auto;width:1140px;}
 header{
   height: 50px;
   margin-bottom: 15px;

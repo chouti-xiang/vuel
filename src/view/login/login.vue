@@ -27,7 +27,8 @@
             </el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">提交</el-button>
+                <el-button type="primary" @click="onSubmit" class="b">提交</el-button>
+                <div @click="defaultlogin" style="text-align:right;cursor: pointer;">游客登录</div>
             </el-form-item>
           </el-form>
         </div>
@@ -109,10 +110,10 @@
     line-height: 50px;  
         margin-top: 5px;
 }
-button{width: 100%;}
+.b{width: 100%;}
 </style>
 <script>
-import { getCookieStorage } from '@/utils/cookieStorage'
+import { getCookieStorage ,setCookieStorage} from '@/utils/cookieStorage'
 export default {
   name: 'login',
   data () {
@@ -145,6 +146,10 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
+    },
+    defaultlogin () {
+      setCookieStorage('username', 'test')
+      this.$router.push('/')
     }
   }
   
