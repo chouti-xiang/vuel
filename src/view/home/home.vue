@@ -185,7 +185,7 @@
                         <div id="xinwen-pernews-main" class="xinwen-pernews-main">
                         <ul class="xinwen-normal-list xinwen-pernews-list" style="width: 976px; left: 0px;" id="hot_article">
                             <li class="xinwen-pernews-item"  v-for="article in item">
-                                <div class="xinwen-pernews-item-news"><a class="xinwen-pernews-item-link" target="_blank" href="http://tj.people.com.cn/n2/2018/0823/c375366-31968703.html"><img class="xinwen-pernews-item-img" :src="'http://'+article.thumb" alt=""></a><div class="xinwen-pernews-item-detail detail-type-img"><router-link :to="{ name: 'article', params: { id: article.id }}" class="xinwen-pernews-item-title">{{article.title}}</router-link>
+                                <div class="xinwen-pernews-item-news"><div class="xinwen-pernews-item-link" target="_blank" href="javascript:;"><router-link :to="{ name: 'article', params: { id: article.id }}"><img class="xinwen-pernews-item-img" :src="'http://'+article.thumb" alt=""></router-link></div><div class="xinwen-pernews-item-detail detail-type-img"><router-link :to="{ name: 'article', params: { id: article.id }}" class="xinwen-pernews-item-title">{{article.title}}</router-link>
                                     <!-- <p class="xinwen-pernews-item-info"><span class="xinwen-pernews-item-read">0</span><span class="xinwen-pernews-item-up">0</span><span class="xinwen-pernews-item-down">0</span></p> -->
                                 </div></div>
                             </li>
@@ -200,7 +200,7 @@
                     <div class="ibx-odd" id="zz">
                         <div id="ibx-mod-koubei" class="ibx-inner ibx-mod-koubei">
                           <div class="ibx-inner-title">
-                          <a data-click="{&quot;act&quot;: &quot;card_koubei_link&quot;}" target="_blank" href="http://koubei.baidu.com/" class="ibx-inner-title-ctx">个人文章</a>
+                          <a data-click="{&quot;act&quot;: &quot;card_koubei_link&quot;}" target="_blank" href="javascript:;" class="ibx-inner-title-ctx">个人文章</a>
                           <ul class="ibx-inner-title-tab">
                             <li ref="ho" data-click="{&quot;act&quot;: &quot;card_koubei_mine&quot;}" class="ibx-inner-title-tabitem ibx-koubei-mine OP_LOG_TITLE" v-bind:class="{'current':is_th ==1}" @click="changetab('think', 9, {key:'is_th',value:1})">我的工作</li>
                             <li ref="think" class="ibx-inner-title-tabitem ibx-koubei-turth OP_LOG_TITLE" v-bind:class="{'current':is_th ==2}" @click="changetab('think', 10, {key:'is_th',value:2})">我的生活</li>
@@ -251,7 +251,7 @@ export default {
       sit: '',
       username: '',
       imageUrl: '',
-      thumbUrl:''
+      thumbUrl: ''
     }
   },
   created () {
@@ -278,7 +278,7 @@ export default {
         this.item = JSON.parse(getsessionStorage('get_item'))
       } else {
         this.item = this.$store.getters.homeitem
-      }  
+      }
     })
     this.$store.dispatch('get_qqtj', {url: this.url, pid: 4, username: this.username}).then(res => {
       if (!this.$store.getters.homeitem) {
@@ -295,12 +295,11 @@ export default {
       }  
     })
     let getthumburl = this.sit + '/index.php?app=web&act=index-get_thumb'
-    this.$store.dispatch('getcontent', {url: getthumburl,uid: this.username}).then(res => {
-        console.log(this.$store.getters.contents)
+    this.$store.dispatch('getcontent', {url: getthumburl, uid: this.username}).then(res => {
       if (!this.$store.getters.contents) {
         // this.think = JSON.parse(getsessionStorage('get_think'))
       } else {
-        this.imageUrl = 'http://'+this.$store.getters.contents.content
+        this.imageUrl = 'http://' + this.$store.getters.contents.content
       }  
     })
   },
@@ -315,16 +314,16 @@ export default {
       removeCookieStorage('username')
       this.username = ''
     },
-     handleAvatarSuccess (res, file) {
+    handleAvatarSuccess (res, file) {
       // this.form.thumb = res
       this.imageUrl = URL.createObjectURL(file.raw)
-      if(!this.username){
+      if (!this.username) {
         this.$message('不登录是无法保存的呦')
-      }else{
+      } else {
         let upthumb = this.sit + '/index.php?app=web&act=index-up_thumb'
         this.$store.dispatch('up_thumb', {url: upthumb, content: res, uid: this.username}).then(res => {
         
-      })
+        })
       }
     },
     beforeAvatarUpload (file) {
@@ -337,7 +336,7 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isJPG && isLt2M
-    },
+    }
   }
 }
 </script>
