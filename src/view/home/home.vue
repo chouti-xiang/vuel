@@ -3,7 +3,7 @@
         <header data-click="{&quot;mod&quot;:&quot;header&quot;}">
             <div class="header-stackup" data-scroll-reveal="enter from the top over 0.66s" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
                 <div class="ibx-container row clr" id="toubu">
-                    <a href="http://i.baidu.com/" target="_self" class="header-logo header-logo-index"></a>
+                    <a href="javascript:;" target="_self" class="header-logo header-logo-index"></a>
                     <div class="header-tool header-tool-user" v-if="this.username">
                         <a class="header-tu-img header-tool-user-nick" >
                             {{this.username}}
@@ -19,7 +19,7 @@
                         </a>
                     </div>
                     <div class="header-tool header-tool-news">
-                        <a href="http://i.baidu.com/msg/messages/list/" class="header-tool-news-num">消息</a>
+                        <a href="javascript:;" class="header-tool-news-num">消息</a>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,8 @@
                     <div class="ibx-hai-title ibx-hai-tool">工具</div>
                 </li>
                 <li class="ibx-header-app-item clr">
-                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="http://element-cn.eleme.io/#/zh-CN"><router-link to="/tools" target="_blank">stylebook</router-link></a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="javascript:;"><router-link to="/tools" target="_blank">stylebook</router-link></a></span>
+                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;sousuo&quot;}" target="_blank" href="javascript:;"><router-link to="/rss" target="_blank">RSS</router-link></a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <div class="ibx-hai-space"></div>
@@ -58,6 +59,7 @@
                 </li>
                 <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="http://www.jq22.com/chm/jquery/index.html">jquery</a></span>
+                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="http://momentjs.cn/">momentjs</a></span>
                 </li>
             </ul>
         </section>
@@ -68,7 +70,7 @@
                         <div class="ibx-inner" id="geren">
                             <div class="ibx-uc-uimg">
                                 <div class="ibx-uc-uimg-mask">
-                                    <a data-click="{&quot;act&quot;:&quot;uc_set&quot;}" class="ibx-uc-ulink" target="_blank" href="http://www.baidu.com/p/setting/profile/portrait">更换头像</a>
+                                    <a data-click="{&quot;act&quot;:&quot;uc_set&quot;}" class="ibx-uc-ulink" target="_blank" href="javascript:;">更换头像</a>
                                 </div>
                                 <el-upload
   class="avatar-uploader"
@@ -82,27 +84,27 @@
                                                      
                             </div>
                             <div class="ibx-uc-unick">
-                                <a data-click="{&quot;act&quot;:&quot;uc_name&quot;}" target="_blank" href="http://www.baidu.com/p/setting/profile/basic" class="ibx-uc-nick">{{name}}</a>                
+                                <a data-click="{&quot;act&quot;:&quot;uc_name&quot;}" target="_blank" href="javascript:;" class="ibx-uc-nick">{{name}}</a>                
                             </div> 
                             <div class="ibx-uc-utool">
                                 <span class="ibx-uc-utool-cover"></span>
                                 <span class="ibx-uc-utool-cover ibx-uc-utool-cover-mask"></span>
                                 <div class="ibx-uc-utool-title">认证 :</div>
                                 <div class="ibx-uc-utool-content clr">
-                                    <a data-click="{&quot;act&quot;:&quot;icon_mobile&quot;}" class="ibx-uc-utool-mobile current" target="_blank" href="http://passport.baidu.com/center" data-title="绑定手机">
+                                    <a data-click="{&quot;act&quot;:&quot;icon_mobile&quot;}" class="ibx-uc-utool-mobile current" target="_blank" href="javascript:;" data-title="绑定手机">
                                     </a>
-                                    <a data-click="{&quot;act&quot;:&quot;icon_email&quot;}" class="ibx-uc-utool-envelope current" target="_blank" href="http://passport.baidu.com/center" data-title="绑定邮箱">
+                                    <a data-click="{&quot;act&quot;:&quot;icon_email&quot;}" class="ibx-uc-utool-envelope current" target="_blank" href="javascript:;" data-title="绑定邮箱">
                                     </a>
                                 </div>
                             </div> 
                             <div class="ibx-uc-uop">
                                 <div class="ibx-uc-uop-item first">
-                                    <a data-click="{&quot;act&quot;:&quot;uc_dingdan&quot;}" target="_blank" href="http://dingdan.baidu.com/my/order/" title="订单中心">
+                                    <a data-click="{&quot;act&quot;:&quot;uc_dingdan&quot;}" target="_blank" href="javascript:;" title="订单中心">
                                         订单中心
                                     </a>
                                 </div>
                                 <div class="ibx-uc-uop-item">
-                                    <a data-click="{&quot;act&quot;:&quot;uc_setting&quot;}" target="_blank" href="http://passport.baidu.com/" title="帐户设置">
+                                    <a data-click="{&quot;act&quot;:&quot;uc_setting&quot;}" target="_blank" href="javascript:;" title="帐户设置">
                                         帐户设置
                                     </a>
                                 </div>
@@ -138,7 +140,7 @@
                     <div class="ibx-even">
                         <div class="ibx-inner" id="ibx-mod-video">
                         <div class="ibx-inner-title" id='fenlei'>
-                            <a  target="_blank" href="http://v.baidu.com/" class="ibx-inner-title-ctx">媒体空间</a>
+                            <a  target="_blank" href="javascript:;" class="ibx-inner-title-ctx">媒体空间</a>
                             <ul class="ibx-inner-title-tab">
                                 <li  class="ibx-inner-title-tabitem ibx-video-hotTop OP_LOG_TITLE current">个人推荐</li>
                             </ul>

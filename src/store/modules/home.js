@@ -57,6 +57,16 @@ const home = {
             reject(error)
           })
       }) 
+    },
+    det_list ({commit}, data) {
+      return new Promise((resolve, reject) => {
+        request(data).then(res => {
+          resolve(res)
+        })
+          .catch(error => {
+            reject(error)
+          })
+      }) 
     }
   }
 }

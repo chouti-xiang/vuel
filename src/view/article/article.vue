@@ -51,6 +51,7 @@
     margin: 0 10px 10px 0;
     font-size: 15px;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+        color: rgba(0,0,0,0.3);
     font-style: normal;
 }
 .rich_media_meta{

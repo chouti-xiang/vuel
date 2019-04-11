@@ -39,6 +39,11 @@ export default new Router({
       path: '/stylebook',
       name: 'stylebook',
       component: () => import('@/view/tools/stylebook')
+    },
+    {
+      path: '/rss',
+      name: 'rss',
+      component: () => import('@/view/rss/rss')
     }
   ]
 })
