@@ -20,7 +20,6 @@ const home = {
       return new Promise((resolve, reject) => {
         request(data).then(res => {
           commit('GET_ITEM', res.data.data)
-          // console.log(JSON.stringify(res.data.data))
           if (data.pid === 7) {
             setsessionStorage('get_item', JSON.stringify(res.data.data))
           }
@@ -30,7 +29,10 @@ const home = {
           if (data.pid === 9) {
             setsessionStorage('get_think', JSON.stringify(res.data.data))
           }
-          resolve()
+          if (data.pid === undefined) {
+            setsessionStorage('get_item', JSON.stringify(res.data.data))
+          }
+          resolve(res.data.data)
         })
           .catch(error => {
             reject(error)

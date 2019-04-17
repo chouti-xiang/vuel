@@ -168,9 +168,13 @@ export default {
     const url = this.sit + '/index.php?app=web&act=index-getstylebook'
     this.$store.dispatch('getstylebook', {url: url, ssid: username}).then((res) => {
       if (this.$store.getters.stylebook !== '操作失败') {
+        console.log(this.$store.getters.stylebook)
+        console.log(1111)
         this.listkey = this.$store.getters.stylebook
         this.$refs.UL.childNodes[0].setAttribute('class', 'active')
         this.pushcontent = this.listkey.value[0].content
+      } else {
+        alert('获取失败')
       }
     }).catch((error) => {
       console.log(error)

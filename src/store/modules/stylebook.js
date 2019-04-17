@@ -12,6 +12,7 @@ const stylebook = {
     getstylebook ({commit}, data) {
       return new Promise((resolve, reject) => {
         request(data).then(res => {
+          console.log(res)
           commit('GET_STYLEBOOK', res.data.data)
           resolve()
         })

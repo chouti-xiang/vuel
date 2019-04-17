@@ -48,6 +48,9 @@
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;wenku&quot;}" target="_blank" href="http://www.cssmoban.com">免费模版</a></span>
                 </li>
                 <li class="ibx-header-app-item">
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;zhidao&quot;}" target="_blank" href="https://www.shanbay.com/bdc/client/guide">扇贝</a></span>
+                </li>
+                <li class="ibx-header-app-item">
                     <div class="ibx-hai-space"></div>
                 </li>
                 <li class="ibx-header-app-item">
@@ -60,6 +63,9 @@
                 <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="http://www.jq22.com/chm/jquery/index.html">jquery</a></span>
                      <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="http://momentjs.cn/">momentjs</a></span>
+                </li>
+                  <li class="ibx-header-app-item">
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="https://echarts.baidu.com/option.html#title">echarts</a></span>
                 </li>
             </ul>
         </section>
@@ -120,12 +126,10 @@
                         <iframe width="800" scrolling="no" height="120" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=19&icon=1&temp=1&num=1&site=12"></iframe>
                         </div>
                         <div class="ibx-cal-box-r" id="ibx-cal-box-r">
-                            <ul class="ibx-cal-dlist clr" style="width: 338px; margin-left: 0px;">
-                                <li class="ibx-cal-ditem ibx-cal-digame" style="border:none">
-                </li>
+                            <ul class="ibx-cal-dlist clr" style="width: 90%; margin-left: 0px;">
+                               
                         <li class="ibx-cal-ditem ibx-cal-diadd">
-                            <a data-click="{&quot;act&quot;:&quot;cal_add&quot;}" href="javascript:;" class="ibx-cal-ditem-addbtn">
-                                <span class="ibx-cal-ditem-addicon"></span>新建提醒</a>
+                            <Echarts :height="height" :options="options" ref="mychild" v-if="hackrest"  />
                             </li>
                         </ul>
                     </div></div>
@@ -216,7 +220,7 @@
                             </div></div></div></div>
                     </div>
                 </div>
-                                                <div data-scroll-reveal="" class="col span_4_2 OP_LOG_LINK" data-click="{&quot;mod&quot;:&quot;card_mgr&quot;,&quot;act&quot;:&quot;msg_click&quot;}" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
+                  <div data-scroll-reveal="" class="col span_4_2 OP_LOG_LINK" data-click="{&quot;mod&quot;:&quot;card_mgr&quot;,&quot;act&quot;:&quot;msg_click&quot;}" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
                     <a href="#" style="display: block;" ><div class="ibx-even editCard" id="editCard">
                         <router-link to="/add" target="_blank">
                         <div class="ibx-inner editCard-inner">
@@ -236,9 +240,11 @@
 <script>
 import { getCookieStorage, removeCookieStorage } from '@/utils/cookieStorage'
 import { getsessionStorage } from '@/utils/sessionStorage'
-
+import Echarts from '@/components/Echarts'
+import moment from 'moment'
 export default {
   name: 'home',
+  components: {Echarts},
   data () {
     return {
       name: ' ',
@@ -253,7 +259,33 @@ export default {
       sit: '',
       username: '',
       imageUrl: '',
-      thumbUrl: ''
+      thumbUrl: '',
+      hackrest: true,
+      height: '200px',
+      options: {
+        title: [{
+          text: '7天发稿量',
+          show: true,
+          textStyle: {
+            fontFamily: 'Arial',
+            color: '#983'
+          },
+          padding: [10, 0, 0, 10]
+        }],
+        series: [{
+          name: '发布文章量',
+          type: 'line',
+          barWidth: '60%',
+          data: [0, 0, 0, 0, 0, 0, 0]
+        }],
+        xAxis: [{
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisTick: {
+            alignWithLabel: true
+          }
+        }]      
+      }
     }
   },
   created () {
@@ -263,13 +295,6 @@ export default {
       this.sit = process.env.BASE_API
     }
     this.id = this.$route.query.id
-  },
-  watch: {
-    // value (newValue, preValue) {
-    //   if (newValue !== preValue && newValue !== this.editor.getHtml()) {
-    //     this.editor.setHtml(newValue)
-    //   }
-    // }
   },
   mounted () {
     this.thumbUrl = this.sit + '/index.php?app=web&act=index-imgup'
@@ -299,11 +324,12 @@ export default {
     let getthumburl = this.sit + '/index.php?app=web&act=index-get_thumb'
     this.$store.dispatch('getcontent', {url: getthumburl, uid: this.username}).then(res => {
       if (!this.$store.getters.contents) {
-        // this.think = JSON.parse(getsessionStorage('get_think'))
       } else {
         this.imageUrl = 'http://' + this.$store.getters.contents.content
       }  
     })
+    this.gettime()
+    this.drawlineOne()
   },
   methods: {
     changetab (parma, pid, obj) {
@@ -317,7 +343,6 @@ export default {
       this.username = ''
     },
     handleAvatarSuccess (res, file) {
-      // this.form.thumb = res
       this.imageUrl = URL.createObjectURL(file.raw)
       if (!this.username) {
         this.$message('不登录是无法保存的呦')
@@ -338,6 +363,30 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isJPG && isLt2M
+    },
+    drawlineOne () {
+      let echarturl = this.sit + '/index.php?app=web&act=index-getListechart'
+    
+      this.$store.dispatch('get_qqtj', {url: echarturl, username: this.username}).then(res => {
+        for (let i in this.$store.getters.homeitem) {
+          for (let j in this.options.xAxis[0].data) {
+            if (this.$store.getters.homeitem[i]['updateTime'].indexOf(this.options.xAxis[0].data[j]) > 0) {
+              this.$set(this.options.series[0].data, j, this.$store.getters.homeitem[i]['num'])
+            }
+          }
+        }
+        this.hackrest = false
+        this.$nextTick(() => {
+          this.hackrest = true
+        })
+      })
+    },
+    gettime () {
+      let j = 6
+      for (let i = 0; i <= 6; i++) {
+        this.$set(this.options.xAxis[0].data, i, moment().add(-j, 'days').format('M-D'))
+        j--
+      }
     }
   }
 }

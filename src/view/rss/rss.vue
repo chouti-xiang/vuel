@@ -124,15 +124,15 @@ export default {
       return formatDate(date, 'yyyy/MM/dd')
     },
     cat (num) {
-      let tag = {'1': '<i class="el-icon-edit"></i>', '2': '<i class="el-icon-star-on"></i>', '3': '<i class="el-icon-picture"></i>'}
+      let tag = {'1': '<i class="el-icon-picture"></i>', '2': '<i class="el-icon-star-on"></i>', '3': '<i class="el-icon-edit"></i>'}
       if (num < 7) return tag[1]
       if (num < 9) return tag[2]
       if (num < 12) return tag[3]
     },
     formatd (time) {
       time = time * 1000
-      let now = moment(time).format('YYYY-MM-DD:')
-      return moment(now, 'YYYY-MM-DD').fromNow()
+      let now = moment(time).format('YYYY-MM-DD,hh-mm-ss a')
+      return moment(now, 'YYYY-MM-DD,hh-mm-ss a').fromNow()
     }
   },
   beforeCreate: function () {
