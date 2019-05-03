@@ -370,7 +370,11 @@ export default {
       this.$store.dispatch('get_qqtj', {url: echarturl, username: this.username}).then(res => {
         for (let i in this.$store.getters.homeitem) {
           for (let j in this.options.xAxis[0].data) {
+            console.log(this.options.xAxis[0].data[j])
+            console.log(this.$store.getters.homeitem[i]['updateTime'])
+            console.log('------')
             if (this.$store.getters.homeitem[i]['updateTime'].indexOf(this.options.xAxis[0].data[j]) > 0) {
+                console.log(this.options.xAxis[0].data[j])
               this.$set(this.options.series[0].data, j, this.$store.getters.homeitem[i]['num'])
             }
           }
@@ -384,7 +388,7 @@ export default {
     gettime () {
       let j = 6
       for (let i = 0; i <= 6; i++) {
-        this.$set(this.options.xAxis[0].data, i, moment().add(-j, 'days').format('M-D'))
+        this.$set(this.options.xAxis[0].data, i, moment().add(-j, 'days').format('MM-DD'))
         j--
       }
     }

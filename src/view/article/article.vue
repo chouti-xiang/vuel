@@ -63,7 +63,7 @@
 }
 #img-content1{max-width: 750px;margin:0 auto;}
 #img-content{
-  position: absolute;
+  /*position: absolute;*/
   width: 100%;
   height: 100%;
   top: 0;
