@@ -72,6 +72,7 @@
   background-color:white;
 }
 #js_content{white-space: pre-wrap;}
+#js_content img{width:100%;}
 #js_content p{
   box-sizing: border-box;
     margin-top: 15px;
