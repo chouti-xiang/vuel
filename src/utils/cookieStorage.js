@@ -4,7 +4,7 @@ export function getCookieStorage (key) {
 }
 
 export function setCookieStorage (key, value) {
-  return Cookies.set(key, value)
+  return Cookies.set(key, value, 60 * 60 * 12)
 }
 
 export function removeCookieStorage (key) {
