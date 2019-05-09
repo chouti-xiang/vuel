@@ -1,5 +1,5 @@
 <template lang="html">
-<div class="bgg">
+<div class="bgg" ref="delay">
   <header>
     <div rel="scroll" id="scroll">
       <div class="use">
@@ -8,7 +8,7 @@
             v-model="is_edit"
             active-color="#13ce66"
             inactive-color="#dcdfe6"
-            active-text="编辑模式"
+            active-text="编辑模式"  
             inactive-text="预览模式">
           </el-switch>
         </div>
@@ -103,13 +103,24 @@ p code{
     padding: 4px 4px 2px 5px;
     letter-spacing: -0.3px;
 }
-
+.closed{
+      margin: 0 auto;
+    width: 1140px;
+  display:none;
+}
+.opend{
+      margin: 0 auto;
+    width: 1140px;
+  display:block;
+}
 </style>
 
 <script>
 import WysiwygEditor from '@/components/WysiwygEditor'
 import { getCookieStorage } from '@/utils/cookieStorage'
+import { Loading } from 'element-ui'
 let username = ''
+let loadingInstance 
 export default {
   name: 'login',
   components: {WysiwygEditor},
@@ -160,6 +171,7 @@ export default {
     }
   },
   mounted () {
+    this.delay('closed')
     if (process.env.BASE_API === 'undefined') {
       this.sit = ''
     } else {
@@ -168,11 +180,10 @@ export default {
     const url = this.sit + '/index.php?app=web&act=index-getstylebook'
     this.$store.dispatch('getstylebook', {url: url, ssid: username}).then((res) => {
       if (this.$store.getters.stylebook !== '操作失败') {
-        console.log(this.$store.getters.stylebook)
-        console.log(1111)
         this.listkey = this.$store.getters.stylebook
         this.$refs.UL.childNodes[0].setAttribute('class', 'active')
         this.pushcontent = this.listkey.value[0].content
+        this.delay('opend')
       } else {
         alert('获取失败')
       }
@@ -249,6 +260,17 @@ export default {
       let _key = this.$refs.rename.dataset.sec
       this.listkey.key[_key].title = _value
       this.flag = 1
+    },
+    delay (flag) {
+      if (flag === 'closed') {
+        loadingInstance = Loading.service({ fullscreen: true })
+      }
+      if (flag === 'opend') {
+        this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
+          loadingInstance.close()
+        })
+      }
+      this.$refs.delay.setAttribute('class', flag)
     }
 
   }
