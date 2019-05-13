@@ -4,7 +4,9 @@ export function getCookieStorage (key) {
 }
 
 export function setCookieStorage (key, value) {
-  return Cookies.set(key, value, 60 * 60 * 12)
+  let millisecond = new Date().getTime()
+  let expiresTime = new Date(millisecond + 60 * 1000 * 120)
+  return Cookies.set(key, value, { expires: expiresTime })
 }
 
 export function removeCookieStorage (key) {
