@@ -121,6 +121,7 @@ import { getCookieStorage } from '@/utils/cookieStorage'
 import { Loading } from 'element-ui'
 let username = ''
 let loadingInstance 
+let ismounted = 1
 export default {
   name: 'login',
   components: {WysiwygEditor},
@@ -161,6 +162,7 @@ export default {
   },
   beforeCreate: function () {
     username = getCookieStorage('username')
+    
     if (!username) {
       this.$alert('没有登录', '错误原因', {
         confirmButtonText: '确定',
@@ -168,28 +170,31 @@ export default {
           location = '#/login'
         }
       })
+      ismounted = 0
     }
   },
   mounted () {
-    this.delay('closed')
     if (process.env.BASE_API === 'undefined') {
       this.sit = ''
     } else {
       this.sit = process.env.BASE_API
     }
     const url = this.sit + '/index.php?app=web&act=index-getstylebook'
-    this.$store.dispatch('getstylebook', {url: url, ssid: username}).then((res) => {
-      if (this.$store.getters.stylebook !== '操作失败') {
-        this.listkey = this.$store.getters.stylebook
-        this.$refs.UL.childNodes[0].setAttribute('class', 'active')
-        this.pushcontent = this.listkey.value[0].content
-        this.delay('opend')
-      } else {
-        alert('获取失败')
-      }
-    }).catch((error) => {
-      console.log(error)
-    })
+    if (ismounted) {
+      this.delay('closed')
+      this.$store.dispatch('getstylebook', {url: url, ssid: username}).then((res) => {
+        if (this.$store.getters.stylebook !== '操作失败') {
+          this.listkey = this.$store.getters.stylebook
+          this.$refs.UL.childNodes[0].setAttribute('class', 'active')
+          this.pushcontent = this.listkey.value[0].content
+          this.delay('opend')
+        } else {
+          alert('获取失败')
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
   },
   methods: {
     onSubmit () {
