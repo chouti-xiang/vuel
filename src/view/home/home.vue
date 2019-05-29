@@ -66,6 +66,7 @@
                 </li>
                   <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="https://echarts.baidu.com/option.html#title">echarts</a></span>
+                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;tuangou&quot;}" target="_blank" href="http://layer.layui.com/">layer</a></span>
                 </li>
             </ul>
         </section>
