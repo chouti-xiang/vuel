@@ -49,6 +49,7 @@
                 </li>
                 <li class="ibx-header-app-item">
                     <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;zhidao&quot;}" target="_blank" href="https://www.shanbay.com/bdc/client/guide">扇贝</a></span>
+                    <span class="ibx-hai-link"><a data-click="{&quot;act&quot;:&quot;wenku&quot;}" target="_blank" href="http://debug.aisu10.com">bug系统</a></span>
                 </li>
                 <li class="ibx-header-app-item">
                     <div class="ibx-hai-space"></div>
@@ -331,6 +332,9 @@ export default {
     })
     this.gettime()
     this.drawlineOne()
+    console.log(new Date())
+    console.log(Date.parse(new Date()))
+    console.log((new Date()).toGMTString())
   },
   methods: {
     changetab (parma, pid, obj) {
@@ -372,7 +376,6 @@ export default {
         for (let i in this.$store.getters.homeitem) {
           for (let j in this.options.xAxis[0].data) {
             if (this.$store.getters.homeitem[i]['updateTime'].indexOf(this.options.xAxis[0].data[j]) > 0) {
-                console.log(this.options.xAxis[0].data[j])
               this.$set(this.options.series[0].data, j, this.$store.getters.homeitem[i]['num'])
             }
           }

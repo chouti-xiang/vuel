@@ -235,7 +235,7 @@ export default {
     getactive (index) {
       this.active = index 
       for (let i in this.$refs.UL.childNodes) {
-        if (i !== index && i.length === 1) {
+        if (i !== index && i % 1 === 0) {
           this.$refs.UL.childNodes[i].setAttribute('class', '')
         } else {
           this.$refs.UL.childNodes[index].setAttribute('class', 'active')

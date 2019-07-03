@@ -39,14 +39,13 @@
 </template>
 <style>
 .bg{
-    background-color: black;
     position: absolute;
     top: 0;
     bottom: 0;
     width: 100%;
     left: 0;
     right: 0;
-    opacity: 0.5;
+    background: rgba(0,0,0,0.5);
 }
   .modal {
     position: fixed;
