@@ -277,7 +277,7 @@ export default {
         series: [{
           name: '发布文章量',
           type: 'line',
-          barWidth: '60%',
+          barWidth: '100%',
           data: [0, 0, 0, 0, 0, 0, 0]
         }],
         xAxis: [{
@@ -386,7 +386,7 @@ export default {
         })
       })
     },
-    gettime () {
+    gettime () {    
       let j = 6
       for (let i = 0; i <= 6; i++) {
         this.$set(this.options.xAxis[0].data, i, moment().add(-j, 'days').format('MM-DD'))
