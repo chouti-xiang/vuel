@@ -51,6 +51,7 @@
 <style>
 @import "style.css";
 .bgg{margin:0 auto;width:1140px;}
+.bgg img{max-width: 100%;}
 header{
   height: 50px;
   margin-bottom: 15px;

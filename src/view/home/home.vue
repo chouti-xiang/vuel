@@ -332,9 +332,6 @@ export default {
     })
     this.gettime()
     this.drawlineOne()
-    console.log(new Date())
-    console.log(Date.parse(new Date()))
-    console.log((new Date()).toGMTString())
   },
   methods: {
     changetab (parma, pid, obj) {
