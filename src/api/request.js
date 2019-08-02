@@ -34,7 +34,6 @@ http.interceptors.request.use(
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }
-    console.log(config)
     return config
   }, () => {
     return Promise.reject({
@@ -48,10 +47,9 @@ http.interceptors.response.use(
     if (!response.data.value && response.data.data.message === 'token invalid') {
       token = '12dkldsjoiedkljs'
     }
-    
-    console.log(response)
+    return response
   },
-  () => {
+  error => {
     if (error.message === 'Network Error') {
       return Promise.reject({
         code: 'online down',

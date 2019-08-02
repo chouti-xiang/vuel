@@ -25,7 +25,7 @@
   clearable>
   </el-input>
           </div>
-        <Wysiwyg-Editor @input="geteditor"  />
+        <Wysiwyg-Editor @input="geteditor"  :value="imghtml"  />
         <div class="tx-tj-qt">
             <div class="tx-tj-qt-titile">封面和摘要</div>
             <div>
@@ -88,17 +88,37 @@
   style="width:50%">
   </el-input>
 </el-form-item>
+<input type="button" value="移动按钮" οnmοuseup="onc()" id="b">
 
         </div>
         <div style="text-align: center;"><el-button type="primary" @click="onSubmit">提交</el-button></div>
         </div>
     </div>
     </el-form>
-    
+  <template >
+      <el-tabs v-model="activeName" @tab-click="handleClick" class="expression">
+    <el-tab-pane label="逗图" name="first">
+       <ul>
+        <li @click="select1($event, 'http://www.aisu10.com/upload/p2545583652.jpg')"><img src="@/assets/1072271146.jpg" /></li>
+         <li @click="select1($event, 'https://upload-images.jianshu.io/upload_images/1626952-f8b2abbf73d35c64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/790/format/webp')"><img src="@/assets/1.jpg" /></li>
+          <li @click="select1($event, '/static/img/2.jpg')"><img src="@/assets/2.jpg" /></li>
+           <li @click="select1($event, '/static/img/3.png')"><img src="@/assets/3.png" /></li>
+            <li @click="select1($event, '/static/img/4.gif')"><img src="@/assets/4.gif" /></li>
+      </ul>
+    </el-tab-pane>
+    <el-tab-pane label="排版" name="second">排版</el-tab-pane>
+    <el-tab-pane label="编者注" name="third">编者注</el-tab-pane>
+    </el-tabs>
+  </template>
 </div>
+
 </template>
 
 <style>
+li{list-style: none;}
+.expression{position:fixed;width:340px;overflow-y: auto;overflow-x: hidden;right:15%;}
+.expression li{width:80px;padding:5px 10px;float:left;}
+.expression li img{width:80px;height:100px;cursor: pointer;}
 #tx-tj{top:80px ;position:absolute;margin:0 auto;z-index: 160;left: 10%;}
   .tx-tj-tj{width: 1000px;margin:0 auto;background-color: white;border-left:1px solid #ddd;border-right:1px solid #ddd;border-bottom: 1px solid #ddd;padding: 0 0 10px 0;}
   .tx-tj-qt{border-top: 1px solid #ebebeb;padding: 10px 10px 25px 10px ;display: table;}
@@ -174,6 +194,8 @@ export default {
       options: '',
       options2: '',
       SelectValue1: '',
+      imghtml: '',
+      activeName: 'first',
       form: {
         title: '',
         author: '',
@@ -258,6 +280,16 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
+    },
+    // 选项卡
+    handleClick (tab, event) {
+      console.log(tab, event)
+    },
+    select1 (object, index) {
+      console.log(object.target)
+     
+      console.log(object, index)
+      this.imghtml = '<img src="' + index + '"/>'
     }
   }
   

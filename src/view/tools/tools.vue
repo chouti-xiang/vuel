@@ -114,6 +114,26 @@ p code{
     width: 1140px;
   display:block;
 }
+.work{
+  font-size: 13px;
+  color: #181818;
+  padding: 0 25px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+.work h4,h3{
+    font-size: 1.2rem;
+    line-height: 18px;
+    margin: 20px 0 2px;
+    color: #333;
+}
+.work ul>li{
+    position: relative;
+}
+.work ul>li :not(table) {
+    line-height: 160%;
+    box-sizing: content-box;
+}
 </style>
 
 <script>
