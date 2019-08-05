@@ -32,36 +32,23 @@ export default {
   },
   watch: {
     value (newValue, preValue) {
-      if (newValue !== preValue && newValue !== this.editor.getHtml()) {
-        let range = window.getSelection().getRangeAt(0)// 创建一个选中区域
-        let element = document.getElementsByClassName('tui-editor-contents')
-        console.log(range)
-        console.log(element)
-        console.log(element[1].childNodes[0])
-        // range.selectNodeContents(element[1])// 选中节点的内容
-        // var range = window.getSelection().getRangeAt(0)
-        // var strongNode = document.getElementById('b')
-        range.selectNodeContents(element[1])
-        range.setStart(element[1].childNodes[0], range.startOffset)
-        console.log(range.startOffset)
-        // range.setStartAfter
-        // range.collapse(true)
-        // 选中区域文本
-        // strongNode.innerHTML = range.toString()
-        // // 删除选中区
+      // if (newValue !== preValue && newValue !== this.editor.getHtml()) {
+        // let range = window.getSelection().getRangeAt(0)// 创建一个选中区域
         // range.deleteContents()
-        // 在光标处插入新节点
-        let c = document.createElement('div')
-        c.innerHTML = newValue
-        // range = range.cloneRange()
-        range.setStartAfter(element[1].childNodes[0])
-        // range.deleteContents()
-        range.insertNode(c)
-        range.collapse(false)
-        range.deleteContents()
-        range.detach()
-        this.editor.setHtml(element[1].childNodes[0])
-      }
+        // let element = document.getElementsByClassName('tui-editor-contents')
+        // let c = document.createElement('p')
+        // c.innerHTML = newValue
+        // let frag = document.createDocumentFragment()
+        // let node = c.firstChild;
+        // let lastNode = frag.appendChild(node);
+        // range.insertNode(frag)
+        // let contentRange = range.cloneRange()
+        // contentRange.setStartAfter(lastNode)
+        // contentRange.collapse(true)
+        // window.getSelection().removeAllRanges();
+        // window.getSelection().addRange(contentRange); 
+        // this.editor.setHtml(element[1].childNodes[0])
+      // }
     }
   },
   computed: {

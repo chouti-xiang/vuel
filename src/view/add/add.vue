@@ -116,7 +116,7 @@
 
 <style>
 li{list-style: none;}
-.expression{position:fixed;width:340px;overflow-y: auto;overflow-x: hidden;right:15%;}
+.expression{position:fixed;width:340px;overflow-y: auto;overflow-x: hidden;right:-6%;}
 .expression li{width:80px;padding:5px 10px;float:left;}
 .expression li img{width:80px;height:100px;cursor: pointer;}
 #tx-tj{top:80px ;position:absolute;margin:0 auto;z-index: 160;left: 10%;}
@@ -286,10 +286,21 @@ export default {
       console.log(tab, event)
     },
     select1 (object, index) {
-      console.log(object.target)
-     
-      console.log(object, index)
       this.imghtml = '<img src="' + index + '"/>'
+       let range = window.getSelection().getRangeAt(0)// 创建一个选中区域
+        range.deleteContents()
+        let element = document.getElementsByClassName('tui-editor-contents')
+        let c = document.createElement('p')
+        c.innerHTML = this.imghtml
+        let frag = document.createDocumentFragment()
+        let node = c.firstChild;
+        let lastNode = frag.appendChild(node);
+        range.insertNode(frag)
+        let contentRange = range.cloneRange()
+        contentRange.setStartAfter(lastNode)
+        contentRange.collapse(true)
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(contentRange); 
     }
   }
   
