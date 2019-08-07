@@ -65,6 +65,7 @@ http.interceptors.response.use(
 )
 export function request (data, method = 'post') {
   const O = O || {}
+  data = data || {}
   for (let i in data) {
     if (i !== 'url') {
       O[i] = data[i]

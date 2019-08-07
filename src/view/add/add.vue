@@ -99,11 +99,7 @@
       <el-tabs v-model="activeName" @tab-click="handleClick" class="expression">
     <el-tab-pane label="逗图" name="first">
        <ul>
-        <li @click="select1($event, 'http://www.aisu10.com/upload/p2545583652.jpg')"><img src="@/assets/1072271146.jpg" /></li>
-         <li @click="select1($event, 'https://upload-images.jianshu.io/upload_images/1626952-f8b2abbf73d35c64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/790/format/webp')"><img src="@/assets/1.jpg" /></li>
-          <li @click="select1($event, '/static/img/2.jpg')"><img src="@/assets/2.jpg" /></li>
-           <li @click="select1($event, '/static/img/3.png')"><img src="@/assets/3.png" /></li>
-            <li @click="select1($event, '/static/img/4.gif')"><img src="@/assets/4.gif" /></li>
+         <li v-for="(value,key) in this.imageList" @click="select1($event, value)"><img :src="'http://'+value" /></li>
       </ul>
     </el-tab-pane>
     <el-tab-pane label="排版" name="second">排版</el-tab-pane>
@@ -190,7 +186,9 @@ export default {
       sit: '',
       id: '',
       imageUrl: '',
+      imageList: '',
       url: '',
+      url1: '',
       options: '',
       options2: '',
       SelectValue1: '',
@@ -232,6 +230,12 @@ export default {
     let SelectUrl = this.sit + '/index.php?app=web&act=index-getPID'
     this.$store.dispatch('getCategray', {url: SelectUrl, pid: 0}).then((res) => {
       this.options = this.$store.getters.categray
+    }).catch((error) => {
+      console.log(error)
+    })
+    this.url1 = this.sit + '/index.php?app=web&act=collect-list_image'
+    this.$store.dispatch('getListImage', {url: this.url1}).then((res) => {
+      this.imageList = this.$store.getters.imagelist
     }).catch((error) => {
       console.log(error)
     })
@@ -286,21 +290,37 @@ export default {
       console.log(tab, event)
     },
     select1 (object, index) {
-      this.imghtml = '<img src="' + index + '"/>'
-       let range = window.getSelection().getRangeAt(0)// 创建一个选中区域
-        range.deleteContents()
-        let element = document.getElementsByClassName('tui-editor-contents')
-        let c = document.createElement('p')
-        c.innerHTML = this.imghtml
-        let frag = document.createDocumentFragment()
-        let node = c.firstChild;
-        let lastNode = frag.appendChild(node);
-        range.insertNode(frag)
-        let contentRange = range.cloneRange()
-        contentRange.setStartAfter(lastNode)
-        contentRange.collapse(true)
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(contentRange); 
+      this.imghtml = '<img src="http://' + index + '"/>'
+      if (window.getSelection().baseNode === null) {
+        return false
+      }
+      // document.getElementsByClassName('tui-editor-contents-placeholder')[0].focus()
+      
+      let sel = window.getSelection()
+      let range = sel.getRangeAt(0)// 创建一个选中区域
+      if (range.startContainer.parentNode.parentElement.className === 'tui-editor-contents') {
+        if (sel.getRangeAt && sel.rangeCount) {
+          range.deleteContents()
+          let c = document.createElement('p')
+          c.innerHTML = this.imghtml
+          let frag = document.createDocumentFragment()
+          let node = c.firstChild
+          let lastNode = frag.appendChild(node)
+          range.insertNode(frag)
+          let contentRange = range.cloneRange()
+          contentRange.setStartAfter(lastNode)
+          contentRange.collapse(true)
+          sel.removeAllRanges()
+          sel.addRange(contentRange)
+        }
+
+        let imageListUrl = this.sit + '/index.php?app=web&act=collect-setcore'
+        this.$store.dispatch('addCore', {url: imageListUrl, imgUrl: index}).then((res) => {
+          console.log(res)
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
     }
   }
   
