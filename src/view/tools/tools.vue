@@ -117,7 +117,7 @@ p code{
 .work{
   font-size: 13px;
   color: #181818;
-  padding: 0 25px;
+  padding: 25px 25px;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
 }
 
@@ -133,6 +133,17 @@ p code{
 .work ul>li :not(table) {
     line-height: 160%;
     box-sizing: content-box;
+}
+.work a{
+ text-decoration: underline;
+    color: #5286bc;
+}  
+.work hr {
+    border-top: 1px solid #eee;
+    margin: 16px 0;
+}
+.work img{
+  max-width: 100%;
 }
 </style>
 

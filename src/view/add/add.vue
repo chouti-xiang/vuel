@@ -8,7 +8,7 @@
   </el-alert>
       <el-form ref="form" :model="form" label-width="65px">
         <div id="tx-tj">
-         <div class="tx-tj-tj">
+         <div class="tx-tj-tj" id="tx-tj-tj">
         <div>
            <el-input 
   v-model="form.title"
@@ -88,7 +88,6 @@
   style="width:50%">
   </el-input>
 </el-form-item>
-<input type="button" value="移动按钮" οnmοuseup="onc()" id="b">
 
         </div>
         <div style="text-align: center;"><el-button type="primary" @click="onSubmit">提交</el-button></div>
@@ -102,8 +101,8 @@
          <li v-for="(value,key) in this.imageList" @click="select1($event, value)"><img :src="'http://'+value" /></li>
       </ul>
     </el-tab-pane>
-    <el-tab-pane label="排版" name="second">排版</el-tab-pane>
-    <el-tab-pane label="编者注" name="third">编者注</el-tab-pane>
+    <el-tab-pane label="排版" name="second">排版，markdown不支持排版，需要更新百度编辑器</el-tab-pane>
+    <el-tab-pane label="编者注" name="third">如果想要更新更多的逗图，请联系作者iseedyou@163.com</el-tab-pane>
     </el-tabs>
   </template>
 </div>
@@ -112,11 +111,11 @@
 
 <style>
 li{list-style: none;}
-.expression{position:fixed;width:340px;overflow-y: auto;overflow-x: hidden;right:-6%;}
+.expression{position:fixed;width:340px;overflow-y: auto;overflow-x: hidden;left:1000px;}
 .expression li{width:80px;padding:5px 10px;float:left;}
 .expression li img{width:80px;height:100px;cursor: pointer;}
 #tx-tj{top:80px ;position:absolute;margin:0 auto;z-index: 160;left: 10%;}
-  .tx-tj-tj{width: 1000px;margin:0 auto;background-color: white;border-left:1px solid #ddd;border-right:1px solid #ddd;border-bottom: 1px solid #ddd;padding: 0 0 10px 0;}
+ #tx-tj #tx-tj-tj{max-width: 1000px;width:auto;margin:0 auto;background-color: white;border-left:1px solid #ddd;border-right:1px solid #ddd;border-bottom: 1px solid #ddd;padding: 0 0 10px 0;}
   .tx-tj-qt{border-top: 1px solid #ebebeb;padding: 10px 10px 25px 10px ;display: table;}
   .tx-tj-qt .tx-tj-qt-titile{margin:15px 0;}
   .title{ margin: 2px 0;padding-right: 98px;box-sizing: border-box;font-size: 24px;font-weight: 500;height: 46px;line-height: 46px;width: 100%;background-color: transparent;border: 0;outline: 0;padding-left: 7px;}
@@ -234,6 +233,7 @@ export default {
       console.log(error)
     })
     this.url1 = this.sit + '/index.php?app=web&act=collect-list_image'
+    console.log(this.url1)
     this.$store.dispatch('getListImage', {url: this.url1}).then((res) => {
       this.imageList = this.$store.getters.imagelist
     }).catch((error) => {
@@ -298,7 +298,7 @@ export default {
       
       let sel = window.getSelection()
       let range = sel.getRangeAt(0)// 创建一个选中区域
-      if (range.startContainer.parentNode.parentElement.className === 'tui-editor-contents') {
+      if (range.startContainer.parentNode.parentElement.className === 'tui-editor-contents' || range.startContainer.parentNode.parentElement.className === 'te-editor') {
         if (sel.getRangeAt && sel.rangeCount) {
           range.deleteContents()
           let c = document.createElement('p')

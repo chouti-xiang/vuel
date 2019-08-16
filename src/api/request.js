@@ -20,7 +20,7 @@ http.interceptors.request.use(
   config => {
     // config.baseURL = '/api/'
     config.withCredentials = true
-    config.timeout = 6000
+    config.timeout = 20000
     let token = '12dkldsjoiedkljs1'
     if (token) {
       config.headers = {
@@ -44,12 +44,13 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   response => {
-    if (!response.data.value && response.data.data.message === 'token invalid') {
-      token = '12dkldsjoiedkljs'
-    }
+    // if (!response.data.value && response.data.data.message === 'token invalid') {
+    //   token = '12dkldsjoiedkljs'
+    // }
     return response
   },
   error => {
+    console.log(error)
     if (error.message === 'Network Error') {
       return Promise.reject({
         code: 'online down',
