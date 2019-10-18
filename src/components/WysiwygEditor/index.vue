@@ -31,11 +31,30 @@ export default {
     }
   },
   watch: {
-        value (newValue, preValue) {
-      if (newValue !== preValue && newValue !== this.editor.getHtml()) {
-        this.editor.setHtml(newValue)
-      }
-    }
+    //     value (newValue, preValue) {
+    //       if (newValue !== preValue && newValue !== this.editor.getHtml()) {
+    //         let range = window.getSelection().getRangeAt(0)// 创建一个选中区域
+    //         range.deleteContents()
+    //         let element = document.getElementsByClassName('tui-editor-contents')
+    //         let c = document.createElement('p')
+    //         c.innerHTML = newValue
+    //         let frag = document.createDocumentFragment()
+    //         let node = c.firstChild
+    //         let lastNode = frag.appendChild(node)
+    //         range.insertNode(frag)
+    //         let contentRange = range.cloneRange()
+    //         contentRange.setStartAfter(lastNode)
+    //         contentRange.collapse(true)
+    //         window.getSelection().removeAllRanges()
+    //         window.getSelection().addRange(contentRange) 
+    //         this.editor.setHtml(element[1].childNodes[0])
+    //       } 
+    // }
+    //     value (newValue, preValue) {
+    //   if (newValue !== preValue && newValue !== this.editor.getHtml()) {
+    //     this.editor.setHtml(newValue)
+    //   }
+    // }
   },
   computed: {
     editorOptions () {
